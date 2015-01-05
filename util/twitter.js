@@ -5,7 +5,7 @@ var watsonModule = require('./watson');
 var Watson = function(watsonConfig, twitterConfig) {
   
 // var w = new Watson({??}   ,  {????})
-
+//new comment
 
   var twitterData;
 
