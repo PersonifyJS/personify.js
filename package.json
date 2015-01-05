@@ -2,6 +2,7 @@
   "name": "watson",
   "description": "",
   "version": "1.0.0",
+  "main": "./util/twitter",
   "author": {
     "name": ""
   },
