@@ -6,8 +6,7 @@ var Watson = function(watsonConfig, twitterConfig) {
   
 // var w = new Watson({??}   ,  {????})
 
-
-  var twitterData;
+  var twitterData = '';
 
   var T = new Twit({
           consumer_key        :  twitterConfig.consumer_key,
@@ -19,15 +18,25 @@ var Watson = function(watsonConfig, twitterConfig) {
     // create a profile request with the text and the htpps options and call it
     // `req.body.subject` is the subject that was entered by the end user
     // TODO: to have the end user enter the date
-  Watson.prototype.user = function(twitterHandler) {
-    T.get('search/tweets', { q: ''+twitterHandler+ },
+  Watson.prototype.user = function(twitterHandler, callback) {
+    //var userData = '';
+    T.get('statuses/user_timeline', { screen_name: twitterHandler, count: 100 },
                              function(err, data, response) {
-      console.log(data.statuses.length)
-      for(var i = 0; i < data.statuses.length; i++) {
-        // accumulate the data (each tweet as a text) received from twitter
-        twitterData += data.statuses[i].text;
-      }
-      watsonModule.watson(watsonConfig, twitterData);
+                              //var stringz = '';
+
+                              for (var i=0;i<data.length;i++){
+                                twitterData += data[i].text;
+                              }
+                              //console.log(twitterData);
+                              watsonModule.watson(watsonConfig, twitterData, callback);
+      //console.log(data.statuses.length)
+      // for(var i = 0; i < data.statuses.length; i++) {
+      //   // accumulate the data (each tweet as a text) received from twitter
+      //   twitterData += data.statuses[i].text;
+      // }
+
+      // console.log('TTTTTTTTTTTTTTTTTTTTTT ' + twitterData + ' TTTTTTTTTTTTTTTTTTTTTT')
+      //watsonModule.watson(watsonConfig, twitterData);
     });
   };
 

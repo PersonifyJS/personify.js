@@ -7,7 +7,7 @@ var flatten = require('./flatten');
 var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
 
 // exporting the watson module to be required by the end user
-module.exports.watson =  function(watsonConfig, data) {
+module.exports.watson =  function(watsonConfig, data, callback) {
 
   // var W = new Watson({config}); // this is what the end user gonna put
 // defaults for dev outside bluemix
@@ -51,9 +51,9 @@ if (process.env.VCAP_SERVICES) {
       'Authorization' :  auth }
     };
 
-  create_profile_request(profile_options, data, res)(function(error,profile_string) {
-    console.log('dataFromTwitterUS', data);
-    if (error) console.log(error);
+  create_profile_request(profile_options, data)(function(error,profile_string) {
+    //console.log('dataFromTwitterUS', data);
+    if (error) callback(data, error);
     else {
       // parse the profile and format it
       var profile_json = JSON.parse(profile_string);
@@ -65,11 +65,11 @@ if (process.env.VCAP_SERVICES) {
 
       // create a visualization request with the profile data
       create_viz_request(viz_options,profile_string)(function(error,viz) {
-        if (error) res.render('index',{'error': error.message});
+        if (error) console.log('Error Message!!!!!!!!!!!!!!')//res.render('index',{'error': error.message});
         else {
         //Here we get the results from Watson and send it back to the client
         //console.log(flat_traits); 
-          console.log(flat_traits);   
+          callback(flat_traits, error);
         }
       });
     }
@@ -77,7 +77,7 @@ if (process.env.VCAP_SERVICES) {
 };
 // creates a request function using the https options and the text in content
 // the function that return receives a callback
-var create_profile_request = function(options,content, res) {
+var create_profile_request = function(options, content, res) {
   return function (/*function*/ callback) {
     // create the post data to send to the User Modeling service
     var post_data = {
@@ -104,8 +104,8 @@ var create_profile_request = function(options,content, res) {
         if (result.statusCode != 200) {
           var error = JSON.parse(response_string);
           // render error if the results are less than 100 words
-          res.send({"error" : "Watson: Oh, dear. It looks like there aren't enough tweets to conduct an analysis. Kindly send me another search query."});
-          callback({'message': error.user_message}, null);
+          // res.send({"error" : "Watson: Oh, dear. It looks like there aren't enough tweets to conduct an analysis. Kindly send me another search query."});
+           callback({'message': error.user_message}, null);
         } else
           callback(null,response_string);
       });
