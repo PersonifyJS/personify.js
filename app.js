@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var Watson = require('watson');
+var Personify = require('personify');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -39,15 +39,16 @@ var W = new Watson({
 
 });
 
+
 //user method is Twitter's user_timeline get request
-// W.user('fr332th1nk', function(data, err){
-//     console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT');
-// });
+W.user('fr332th1nk', function(data, err){
+    console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT');
+});
 
 //userHome method is Twitter's home_timeline get request
-// W.userHome(function(data, err){
-//     console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT')
-// }, { count: 100 /*optional you may put as many params as you want*/});
+W.userHome(function(data, err){
+    console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT')
+}, { count: 100 /*optional you may put as many params as you want*/});
 
 // search all tweets params q is required
 W.searchGeo(function(data, err){
