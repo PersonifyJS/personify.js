@@ -55,6 +55,36 @@ var Watson = function(watsonConfig, twitterConfig) {
   
 
   // return all tweets q: is required!
+
+  Watson.prototype.searchGeo = function(callback, query, geotype) {
+    var geoSearch;
+    if (typeof geotype === 'string') {
+      geoSearch = geoLocations[geotype].geo;
+    } else if (Array.isArray(geotype)) {
+      geoSearch = geotype;
+    } else {
+      geoSearch = null;
+    }
+
+    T.get('search/tweets', { q: query, geocode: geoSearch }, function(err, data, response) {
+    
+      if (data.statuses) {
+        for(var i = 0; i < data.statuses.length; i++) {
+          // accumulate the data (each tweet as a text) received from twitter
+          twitterData += data.statuses[i].text;
+        }
+        watsonModule.watson(watsonConfig, twitterData, callback);
+      } else {
+        console.log(data)
+        callback(data, err);
+      }
+    });
+
+   
+      
+
+  };
+
   Watson.prototype.searchTweets = function(callback, params) {
 
     T.get('search/tweets', params, function(err, data, response) {
@@ -70,7 +100,7 @@ var Watson = function(watsonConfig, twitterConfig) {
         callback(data, err);
       }
     });
-
+  };
    
       
 

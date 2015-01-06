@@ -50,9 +50,9 @@ var W = new Watson({
 // }, { count: 100 /*optional you may put as many params as you want*/});
 
 // search all tweets params q is required
-W.searchTweets(function(data, err){
+W.searchGeo(function(data, err){
    console.log(data, err);
-}, { q: '#nike'});
+}, '#nike', 'NY');
 
 
 
