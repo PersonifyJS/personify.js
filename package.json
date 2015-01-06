@@ -2,7 +2,7 @@
   "name": "watson",
   "description": "",
   "version": "1.0.0",
-  "main": "./util/twitter",
+  "main": "./util/watson",
   "author": {
     "name": ""
   },
@@ -10,10 +10,11 @@
     "twit": "^1.1.18"
   },
   "devDependencies": {
-    "mocha": "1.8.1",
+    "async": "0.2.9",
     "colors": "0.6.x",
     "memwatch": "0.2.2",
-    "async": "0.2.9"
+    "mocha": "1.8.1",
+    "should": "^4.4.2"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha tests/* -t 70000 -R spec --bail"
