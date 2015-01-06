@@ -1,11 +1,10 @@
 // Twitter config
 var Twit = require('twit');
 var watsonModule = require('./server');
+var geoLocations = require('../lib/geoLocations');
 
-var Watson = function(watsonConfig, twitterConfig) {
+var Personify = function(watsonConfig, twitterConfig) {
   
-// var w = new Watson({??}   ,  {????})
-
   var twitterData = '';
 
   var T = new Twit({
@@ -19,7 +18,7 @@ var Watson = function(watsonConfig, twitterConfig) {
     // `req.body.subject` is the subject that was entered by the end user
     // TODO: to have the end user enter the date
 
-  Watson.prototype.user = function(twitterHandler, callback) {
+  Personify.prototype.user = function(twitterHandler, callback) {
     //var userData = '';
     T.get('statuses/user_timeline', { screen_name: twitterHandler, count: 100 },
                              function(err, data, response) {
@@ -37,7 +36,7 @@ var Watson = function(watsonConfig, twitterConfig) {
   };
 
 //Returns a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. The home timeline is central to how most users interact with the Twitter service.
-  Watson.prototype.userHome = function(callback, params) {
+  Personify.prototype.userHome = function(callback, params) {
 
     var getData = function(data) {
       for (var i = 0; i < data.length; i++){
@@ -56,7 +55,7 @@ var Watson = function(watsonConfig, twitterConfig) {
 
   // return all tweets q: is required!
 
-  Watson.prototype.searchGeo = function(callback, query, geotype) {
+  Personify.prototype.searchGeo = function(callback, query, geotype) {
     var geoSearch;
     if (typeof geotype === 'string') {
       geoSearch = geoLocations[geotype].geo;
@@ -68,7 +67,7 @@ var Watson = function(watsonConfig, twitterConfig) {
 
     T.get('search/tweets', { q: query, geocode: geoSearch }, function(err, data, response) {
     
-      if (data.statuses) {
+      if (data) {
         for(var i = 0; i < data.statuses.length; i++) {
           // accumulate the data (each tweet as a text) received from twitter
           twitterData += data.statuses[i].text;
@@ -79,13 +78,9 @@ var Watson = function(watsonConfig, twitterConfig) {
         callback(data, err);
       }
     });
-
-   
-      
-
   };
 
-  Watson.prototype.searchTweets = function(callback, params) {
+  Personify.prototype.searchTweets = function(callback, params) {
 
     T.get('search/tweets', params, function(err, data, response) {
     
@@ -106,15 +101,4 @@ var Watson = function(watsonConfig, twitterConfig) {
 
 };
 
-module.exports = Watson;
-
-
-// T.get('search/tweets', { q: ''+twitterHandler+' since:2014-10-01', 
-//                              count: 5000, geocode: req.body.geo, lang: 'en' },
-//                              function(err, data, response) {
-
-  //for search tweets
-      // for(var i = 0; i < data.statuses.length; i++) {
-      //   // accumulate the data (each tweet as a text) received from twitter
-      //   twitterData += data.statuses[i].text;
-      // }
+module.exports = Personify;
