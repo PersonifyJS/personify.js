@@ -11,9 +11,9 @@ module.exports.watson =  function(watsonConfig, data, callback) {
 
   // var W = new Watson({config}); // this is what the end user gonna put
 // defaults for dev outside bluemix
-var service_url = "https://gateway.watsonplatform.net/systemu/service/";
-var service_username = "12312a68-fdff-4064-9928-eb088a960815";
-var service_password = "KUwy0neR5kpV";
+var service_url = watsonConfig.service_url;
+var service_username = watsonConfig.service_username;
+var service_password = watsonConfig.service_password;
 
 if (process.env.VCAP_SERVICES) {
   console.log('Parsing VCAP_SERVICES');

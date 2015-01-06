@@ -27,18 +27,29 @@ var Watson = function(watsonConfig, twitterConfig) {
                               for (var i=0;i<data.length;i++){
                                 twitterData += data[i].text;
                               }
-                              //console.log(twitterData);
                               watsonModule.watson(watsonConfig, twitterData, callback);
-      //console.log(data.statuses.length)
-      // for(var i = 0; i < data.statuses.length; i++) {
-      //   // accumulate the data (each tweet as a text) received from twitter
-      //   twitterData += data.statuses[i].text;
-      // }
 
-      // console.log('TTTTTTTTTTTTTTTTTTTTTT ' + twitterData + ' TTTTTTTTTTTTTTTTTTTTTT')
-      //watsonModule.watson(watsonConfig, twitterData);
     });
   };
+
+//Returns a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. The home timeline is central to how most users interact with the Twitter service.
+  Watson.prototype.userHome = function(params, callback) {
+    var getdata = function(err, data, response) {
+      for (var i=0;i<data.length;i++){
+        twitterData += data[i].text;
+      }
+      watsonModule.watson(watsonConfig, twitterData, callback);
+    }; 
+
+    if (params){
+      T.get('statuses/home_timeline', params, getData(err, data, response);
+    } else {
+    T.get('statuses/home_timeline', getData(err, data, response);
+    }
+    
+  };
+
+
 
 };
 
@@ -48,3 +59,9 @@ module.exports = Watson;
 // T.get('search/tweets', { q: ''+twitterHandler+' since:2014-10-01', 
 //                              count: 5000, geocode: req.body.geo, lang: 'en' },
 //                              function(err, data, response) {
+
+  //for search tweets
+      // for(var i = 0; i < data.statuses.length; i++) {
+      //   // accumulate the data (each tweet as a text) received from twitter
+      //   twitterData += data.statuses[i].text;
+      // }
