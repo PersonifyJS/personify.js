@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var Watson = require('watson');
+var Personify = require('personify');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,23 +26,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-var W = new Watson({
-    service_url: "https://gateway.watsonplatform.net/systemu/service/",
-    service_username: "12312a68-fdff-4064-9928-eb088a960815",
-    service_password: "KUwy0neR5kpV"
-},
-{
-    consumer_key:         'nnnMzv63aJKbQgzF77vQLXCm0',
-    consumer_secret:      'BAG1XL3PHUVw6AsW7K0dRcIv6qkITkWARmZL9Bb8nOKfTkbTpo',
-    access_token:         '35398491-9KTshSy7QNiKh0Ia71AeZ6D1XMg6teKJWAwp6YNNE',
-    access_token_secret:  'ivIGOcV4OHxW9lRrW7pevEcxwtk2RDGzVSW6IdOqz9R0D'
-
+var P = new Personify({
+    watsonConfig : {
+        service_url: "https://gateway.watsonplatform.net/systemu/service/",
+        service_username: "12312a68-fdff-4064-9928-eb088a960815",
+        service_password: "KUwy0neR5kpV"
+    },
+    twitterConfig : {
+        consumer_key:         'nnnMzv63aJKbQgzF77vQLXCm0',
+        consumer_secret:      'BAG1XL3PHUVw6AsW7K0dRcIv6qkITkWARmZL9Bb8nOKfTkbTpo',
+        access_token:         '35398491-9KTshSy7QNiKh0Ia71AeZ6D1XMg6teKJWAwp6YNNE',
+        access_token_secret:  'ivIGOcV4OHxW9lRrW7pevEcxwtk2RDGzVSW6IdOqz9R0D'
+    }
 });
 
 //user method is Twitter's user_timeline get request
-// W.user('fr332th1nk', function(data, err){
-//     console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT');
-// });
+P.user('fr332th1nk', function(data, err){
+    console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT');
+});
 
 //userHome method is Twitter's home_timeline get request
 // W.userHome(function(data, err){
@@ -50,13 +51,9 @@ var W = new Watson({
 // }, { count: 100 /*optional you may put as many params as you want*/});
 
 // search all tweets params q is required
-W.searchGeo(function(data, err){
-   console.log(data, err);
-}, '#nike', 'NY');
-
-
-
-
+// W.searchGeo(function(data, err){
+//    console.log(data, err);
+// }, '#nike', 'NY');
 
 
 
