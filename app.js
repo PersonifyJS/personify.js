@@ -45,12 +45,23 @@ var W = new Watson({
 // });
 
 //userHome method is Twitter's home_timeline get request
-W.userHome({
-    count: 100,
-    since_id: 35398000, 
-}, function(data, err){
-    //console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT')
-})
+// W.userHome(function(data, err){
+//     console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT')
+// }, { count: 100 /*optional you may put as many params as you want*/});
+
+// search all tweets params q is required
+W.searchTweets(function(data, err){
+   console.log(data, err);
+}, { q: '#nike'});
+
+
+
+
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

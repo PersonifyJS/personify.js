@@ -23,31 +23,58 @@ var Watson = function(watsonConfig, twitterConfig) {
     T.get('statuses/user_timeline', { screen_name: twitterHandler, count: 100 },
                              function(err, data, response) {
                               //var stringz = '';
-
-                              for (var i=0;i<data.length;i++){
-                                twitterData += data[i].text;
+                              if (data.length) {
+                                for (var i=0;i<data.length;i++){
+                                  twitterData += data[i].text;
+                                }
+                                watsonModule.watson(watsonConfig, twitterData, callback);
+                              } else {
+                                callback(data, err);
                               }
-                              watsonModule.watson(watsonConfig, twitterData, callback);
-
+                              
     });
   };
 
 //Returns a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. The home timeline is central to how most users interact with the Twitter service.
-  Watson.prototype.userHome = function(params, callback) {
-    var getdata = function(err, data, response) {
-      for (var i=0;i<data.length;i++){
+  Watson.prototype.userHome = function(callback, params) {
+
+    var getData = function(data) {
+      for (var i = 0; i < data.length; i++){
         twitterData += data[i].text;
       }
       watsonModule.watson(watsonConfig, twitterData, callback);
     }; 
 
     if (params){
-      T.get('statuses/home_timeline', params, getData(err, data, response);
+      T.get('statuses/home_timeline', params, function(err, data, response) { getData(data); });
     } else {
-    T.get('statuses/home_timeline', getData(err, data, response);
+      T.get('statuses/home_timeline', function(err, data, response) { getData(data); });
     }
-    
   };
+  
+
+  // return all tweets q: is required!
+  Watson.prototype.searchTweets = function(callback, params) {
+
+    T.get('search/tweets', params, function(err, data, response) {
+    
+      if (data.statuses) {
+        for(var i = 0; i < data.statuses.length; i++) {
+          // accumulate the data (each tweet as a text) received from twitter
+          twitterData += data.statuses[i].text;
+        }
+        watsonModule.watson(watsonConfig, twitterData, callback);
+      } else {
+        console.log(data)
+        callback(data, err);
+      }
+    });
+
+   
+      
+
+  };
+
 
 
 
