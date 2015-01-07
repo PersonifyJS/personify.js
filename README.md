@@ -96,26 +96,47 @@ In order to use IBM Watson, you need to:
 
 #How do I run the tests?
 
-Create two files: `config1.js` and `config2.js` at the root of the `twit` folder. They should contain two different sets of oauth credentials for twit to use (two accounts are needed for testing interactions). They should both look something like this:
+To make the tests pass you will need to fill out the file: `config.js` inside the tests folder. The file should look something like this:
 
 ```
-module.exports = {
-    consumer_key: '...'
-  , consumer_secret: '...'
-  , access_token: '...'
-  , access_token_secret: '...'
+var config = {
+    watsonConfig : {
+        service_url:          '...',
+        service_username:     '...',
+        service_password:     '...'
+    },
+    twitterConfig : {
+        consumer_key:         '...',
+        consumer_secret:      '...',
+        access_token:         '...',
+        access_token_secret:  '...'
+    }
 }
+
+module.exports = config;
 ```
 
-Then run the tests:
+To run the tests:
 
 ```
 npm test
 ```
 
+### Contributing
+
+See 
+
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [STYLE-GUIDE.md](STYLE-GUIDE.md) 
+
+### To Do
+
+- Expand library with more Watson services
+
 -------
 
-## Changelog
 
-###0.1.0
+## Release History
+
+###0.1.0 Initial release
 
