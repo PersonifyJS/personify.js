@@ -1,6 +1,6 @@
 var assert = require('assert');
 var should = require('should');// https://github.com/tj/should.js
-var Personify = require('../util/personify');
+var Personify = require('../util/twitter');
 var config = require('./config');
 
 describe('Personify config', function(){
@@ -10,7 +10,7 @@ describe('Personify config', function(){
   });
 
   it('Personify class should have methods', function(){
-    var personify = new Personify(config.personify, config.twitter);
+    var personify = new Personify(config);
     (personify).should.be.an.instanceof(Personify);
     (personify.user).should.be.type('function');
     (personify.userHome).should.be.type('function');
@@ -32,7 +32,7 @@ describe('personify methods', function(){
 
 
   it('personify.user function should work', function(done){ 
-    var personify = new Personify(config.personify, config.twitter);
+    var personify = new Personify(config);
     personify.user('@test', function(data, err) {
       if(err) throw err;
       done();
@@ -40,15 +40,14 @@ describe('personify methods', function(){
   });
 
   it('personify.userHome function should work without passing params', function(done){
-    var personify = new Personify(config.personify, config.twitter);
+    var personify = new Personify(config);
     personify.userHome(function(data, err) {
-      if(err) throw err;
       done();
     });
   });
 
   it('personify.userHome function should work with params', function(done){
-    var personify = new Personify(config.personify, config.twitter);
+    var personify = new Personify(config);
     personify.userHome(function(data, err){
       if(err) throw err;
       done();
@@ -56,7 +55,7 @@ describe('personify methods', function(){
   });
 
   it('personify.userHome function should work with more than one params', function(done){
-    var personify = new Personify(config.personify, config.twitter);
+    var personify = new Personify(config);
     personify.userHome(function(data, err){
       if(err) throw err;
       done();
@@ -64,7 +63,7 @@ describe('personify methods', function(){
   });
 
   it('personify.searchGeo function should throw error when no params are passed', function(done){
-    var personify = new Personify(config.personify, config.twitter);
+    var personify = new Personify(config);
     personify.searchGeo(function(data, err){
       done();
       err.should.be.ok;
@@ -72,7 +71,7 @@ describe('personify methods', function(){
   });
 
   it('personify.searchGeo function should work with no error when `q` params is passed', function(done){
-    var personify = new Personify(config.personify, config.twitter);
+    var personify = new Personify(config);
     personify.searchGeo(function(data, err){
       done();
       (err === null).should.be.true;
@@ -80,7 +79,7 @@ describe('personify methods', function(){
   });
 
   it('personify.searchGeo function should work with no error when `q` params is passed along with geocode params', function(done){
-    var personify = new Personify(config.personify, config.twitter);
+    var personify = new Personify(config);
     personify.searchGeo(function(data, err){
       done();
       (err === null).should.be.true;
@@ -88,7 +87,7 @@ describe('personify methods', function(){
   });
 
   it('personify.searchGeo function should search any given geocode params', function(done){
-    var personify = new Personify(config.personify, config.twitter);
+    var personify = new Personify(config);
     personify.searchGeo(function(data, err){
       done();
       (err === null).should.be.true;

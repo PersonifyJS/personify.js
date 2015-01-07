@@ -2,7 +2,7 @@ var https = require('https');
 var url = require('url');
 var querystring = require('querystring');
 var extend = require('util')._extend;
-var flatten = require('./flatten');
+var flatten = require('../lib/flatten');
 
 var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
 

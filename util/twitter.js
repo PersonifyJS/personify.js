@@ -1,6 +1,7 @@
 // Twitter config
 var Twit = require('twit');
 var personifyModule = require('./watson');
+var geoLocations = require('../lib/geoLocations');
 
 var Personify = function(auth) {
 
@@ -62,7 +63,7 @@ var Personify = function(auth) {
     }
 
     T.get('search/tweets', { q: query, geocode: geoSearch }, function(err, data, response) {
-      if (data.statuses) {
+      if (data) {
         for(var i = 0; i < data.statuses.length; i++) {
           // accumulate the data (each tweet as a text) received from twitter
           twitterData += data.statuses[i].text;
