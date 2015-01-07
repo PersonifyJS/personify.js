@@ -114,6 +114,7 @@ var create_profile_request = function(options, content, res) {
     profile_req.on('error', function(e) {
       callback(e,null);
     });
+  };
 
     profile_req.write(JSON.stringify(post_data));
     profile_req.end();
