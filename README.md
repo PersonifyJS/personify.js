@@ -1,6 +1,6 @@
 #personify.js
 
-JavaScript-based library for accessing IBM Watson features using Twitter data. 
+A JavaScript based library that allows easy access to IBM Watson features utilizing Twitter data. IBM Watson has some of the most advanced linguistic analytics tools available today. Our current version implements Watson's 'User Modeling' service, which extracts cognitive and social characteristics, including Big Five, Values, and Needs, from communications data provided.
 
 Supports Twitter REST API.
 
@@ -19,9 +19,9 @@ var Personify = require('personify');
 //See below to find out where to get these authentication credentials
 var P = new Personify({
     watsonConfig : {
-        service_url: '...',
-        service_username: '...',
-        service_password: '...'
+        service_url:          '...',
+        service_username:     '...',
+        service_password:     '...'
     },
     twitterConfig : {
         consumer_key:         '...',
