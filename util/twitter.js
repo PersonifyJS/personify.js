@@ -35,7 +35,8 @@ var Personify = function(auth) {
   };
 
 //Returns a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. The home timeline is central to how most users interact with the Twitter service.
-  Personify.prototype.userHome = function(callback, params) {
+  Personify.prototype.userHome = function(params, callback) {
+
     var getData = function(data) {
       for (var i = 0; i < data.length; i++){
         twitterData += data[i].text;
@@ -43,7 +44,7 @@ var Personify = function(auth) {
       personifyModule.watson(auth, twitterData, callback);
     }; 
 
-    if (params){
+    if (params.length !== 0){
       T.get('statuses/home_timeline', params, function(err, data, response) { getData(data); });
     } else {
       T.get('statuses/home_timeline', function(err, data, response) { getData(data); });

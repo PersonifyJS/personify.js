@@ -1,3 +1,5 @@
+// In order to run 'npm test' you will need to paste your Watson and Twitter 
+// credentials
 var config = {
     watsonConfig : {
         service_url: "https://gateway.watsonplatform.net/systemu/service/",

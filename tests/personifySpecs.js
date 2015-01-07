@@ -48,18 +48,18 @@ describe('personify methods', function(){
 
   it('personify.userHome function should work with params', function(done){
     var personify = new Personify(config);
-    personify.userHome(function(data, err){
+    personify.userHome({count:200}, function(data, err){
       if(err) throw err;
       done();
-    }, {count:200});
+    });
   });
 
   it('personify.userHome function should work with more than one params', function(done){
     var personify = new Personify(config);
-    personify.userHome(function(data, err){
+    personify.userHome({count:200, lang: 'en'}, function(data, err){
       if(err) throw err;
       done();
-    }, {count:200, lang: 'en'});
+    });
   });
 
   it('personify.searchGeo function should throw error when no params are passed', function(done){
