@@ -50,10 +50,10 @@ W.userHome({ count: 100 /*optional you may put as many params as you want*/}, fu
     console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT')
 });
 
-// search all tweets params q is required
-// W.searchGeo(function(data, err){
-//    console.log(data, err);
-// }, '#nike', 'NY');
+//search all tweets params q is required
+W.searchTweets({q: '#nike', count: 100 }, function(data, err){
+   console.log(data, err);
+});
 
 
 

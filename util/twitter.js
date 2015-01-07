@@ -38,10 +38,14 @@ var Personify = function(auth) {
   Personify.prototype.userHome = function(params, callback) {
 
     var getData = function(data) {
-      for (var i = 0; i < data.length; i++){
-        twitterData += data[i].text;
-      }
-      personifyModule.watson(auth, twitterData, callback);
+      if (data) {
+        for (var i = 0; i < data.length; i++){
+          twitterData += data[i].text;
+        }
+        personifyModule.watson(auth, twitterData, callback);
+      } else {
+        callback(null, 'No data found!')
+      }   
     }; 
 
     if (params.length !== 0){
@@ -53,17 +57,23 @@ var Personify = function(auth) {
 
   // return all tweets q: is required!
 
-  Personify.prototype.searchGeo = function(callback, query, geotype) {
-    var geoSearch;
-    if (typeof geotype === 'string') {
-      geoSearch = geoLocations[geotype].geo;
-    } else if (Array.isArray(geotype)) {
-      geoSearch = geotype;
-    } else {
-      geoSearch = null;
+  Personify.prototype.searchTweets = function(params, callback) {
+ 
+    var searchParams = params;
+    var geotype;
+ 
+    if (typeof searchParams.geocode === 'string') {
+      if (geoLocations[searchParams.geocode]) {
+        geotype = geoLocations[searchParams.geocode].geo;
+        searchParams.geocode = geotype;
+      } else {
+        callback(null, 'Geo location is not valid!')
+      }
+      
     }
-
-    T.get('search/tweets', { q: query, geocode: geoSearch }, function(err, data, response) {
+ 
+    T.get('search/tweets', searchParams, function(err, data, response) {
+   
       if (data) {
         for(var i = 0; i < data.statuses.length; i++) {
           // accumulate the data (each tweet as a text) received from twitter
@@ -75,34 +85,8 @@ var Personify = function(auth) {
         callback(data, err);
       }
     });
-
   };
 
-  Personify.prototype.searchTweets = function(callback, params) {
-    T.get('search/tweets', params, function(err, data, response) {
-      if (data.statuses) {
-        for(var i = 0; i < data.statuses.length; i++) {
-          // accumulate the data (each tweet as a text) received from twitter
-          twitterData += data.statuses[i].text;
-        }
-        personifyModule.watson(auth, twitterData, callback);
-      } else {
-        console.log(data)
-        callback(data, err);
-      }
-    });
-  };
 };
 
 module.exports = Personify;
-
-
-// T.get('search/tweets', { q: ''+twitterHandler+' since:2014-10-01', 
-//                              count: 5000, geocode: req.body.geo, lang: 'en' },
-//                              function(err, data, response) {
-
-  //for search tweets
-      // for(var i = 0; i < data.statuses.length; i++) {
-      //   // accumulate the data (each tweet as a text) received from twitter
-      //   twitterData += data.statuses[i].text;
-      // }
