@@ -72,7 +72,7 @@ Key-value pairs are optional, but at least empty object literal brackets are req
 
 ##`P.searchTweet = function({ q: 'input', additional params}, callback)`
 
-The 'q' key and it's associated value, which should be a string, are required. The string can be any word you may use to search in Twitter's search bar. Any additional key-value pairs are optional. 
+The 'q' key and its associated value, which should be a string, are required. The string can be any word you may use to search in Twitter's search bar. Any additional key-value pairs are optional. 
 
 **callback**
 
@@ -89,7 +89,7 @@ Anything in the Twitter API:
 
 Go here to create an app and get OAuth credentials (if you haven't already): https://dev.twitter.com/apps/new
 
-Make your way over here to 
+In order to use IBM Watson, you need to register for an IBM Bluemix account: http://www-01.ibm.com/software/bluemix/
 
 
 #How do I run the tests?
@@ -116,11 +116,6 @@ You can also run the example:
 ```
 node examples/rtd2.js
 ```
-
-![iRTD2](http://dl.dropbox.com/u/32773572/RTD2_logo.png)
-
-The example is a twitter bot named [RTD2](https://twitter.com/#!/iRTD2) written using `twit`. RTD2 tweets about **github** and curates its social graph.
-
 -------
 
 ## Changelog
