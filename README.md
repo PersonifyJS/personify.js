@@ -72,7 +72,7 @@ Key-value pairs are optional, but at least empty object literal brackets are req
 
 ##`P.searchTweet = function({ q: 'input', additional params}, callback)`
 
-The 'q' key and its associated value, which should be a string, are required. The string can be any word you may use to search in Twitter's search bar. Any additional key-value pairs are optional. 
+The 'q' key and its associated value, which should be a string, are required. The string can be any word you may use to search in Twitter's search bar. Any additional key-value pairs are optional.
 
 **callback**
 
