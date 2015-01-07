@@ -46,14 +46,14 @@ P.user('fr332th1nk', function(data, err){
 });
 
 //userHome method is Twitter's home_timeline get request
-// W.userHome(function(data, err){
-//     console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT')
-// }, { count: 100 /*optional you may put as many params as you want*/});
+W.userHome({ count: 100 /*optional you may put as many params as you want*/}, function(data, err){
+    console.log('TTTTTTTTTTTTTTTTTT ' , data , 'TTTTTTTTTTTTTTTTTT')
+});
 
-// search all tweets params q is required
-// W.searchGeo(function(data, err){
-//    console.log(data, err);
-// }, '#nike', 'NY');
+//search all tweets params q is required
+W.searchTweets({q: '#nike', count: 100 }, function(data, err){
+   console.log(data, err);
+});
 
 
 
