@@ -78,22 +78,20 @@ The 'q' key and its associated value, which should be a string, are required. Th
 
 `function (data, err)`
 
-- `data` is the parsed data received from Twitter.
+- `data` is the parsed data received from IBM Watson.
 - callback is required for all methods. 
 
 -------
 
 #Find your OAuth credentials
 
-Anything in the Twitter API:
-
-Go here to create an app and get OAuth credentials (if you haven't already): https://dev.twitter.com/apps/new
+Go here to create a Twitter app and get OAuth credentials (if you haven't already): https://dev.twitter.com/apps/new
 
 In order to use IBM Watson, you need to:
--Register for an IBM Bluemix account: http://www-01.ibm.com/software/bluemix/
--Create an App
--Add a User Modeling service
--From there you can get your credentials
+- Register for an IBM Bluemix account: http://www-01.ibm.com/software/bluemix/
+- Create an App
+- Add a User Modeling service
+- From there you can get your credentials
 
 
 #How do I run the tests?
@@ -115,11 +113,6 @@ Then run the tests:
 npm test
 ```
 
-You can also run the example:
-
-```
-node examples/rtd2.js
-```
 -------
 
 ## Changelog
