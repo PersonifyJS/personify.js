@@ -13,11 +13,11 @@ npm install personify
 ##Usage:
 
 ```javascript
-var Watson = require('watson');
+var Personify = require('personify');
 
 
 //See below to find out where to get these authentication credentials
-var P = new personify({
+var P = new Personify({
     watsonConfig : {
         service_url: '...',
         service_username: '...',
