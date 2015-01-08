@@ -19,28 +19,35 @@ npm install personify --save
 ```javascript
 var Personify = require('personify');
 
-
-//See below to find out where to get these authentication credentials
-var P = new Personify({
-    watsonConfig : {
+//For every service you use through Watson, IBM will provide you with a separate set of OAuth credentials. See below to find out where to get these credentials.
+var config = {
+//example credentials for Watson Machine Translation service
+    translateConfig : {
         service_url:          '...',
         service_username:     '...',
         service_password:     '...'
     },
+//example credentials for Watson User Modeling service
+    personalityConfig : {
+        service_url:          '...',
+        service_username:     '...',
+        service_password:     '...'
+    },
+//example credentials for Twitter API
     twitterConfig : {
         consumer_key:         '...',
         consumer_secret:      '...',
         access_token:         '...',
         access_token_secret:  '...'
     }
-});
+}
 
 //
 //  Use Watson to discover personality traits, values and needs for a Twitter user
 //  '@' can be used before a username, but is not required (e.g. '@userName')
 //
 P.user = ( 'userName' , function (data, err) {
-    console.log(data);
+    console.log(data, err);
 });
 
 //
@@ -53,7 +60,7 @@ var params1 = {
               };
 
 P.userHome( params1, function (data, err) {
-    console.log(data);
+    console.log(data, err);
 });
 
 //
@@ -65,7 +72,7 @@ var params2 = {
               };
 
 P.searchTweet = function( params2 , function (data, err) {
-  console.log(data);
+  console.log(data, err);
 });
 
 //
@@ -87,7 +94,7 @@ P.translation( params3 , function (data, err) {
 
 # personify API:
 
-##`P.user( 'input' , callback )`
+##`P.user( 'input', callback )`
 
 **'input'**
 
@@ -132,7 +139,6 @@ In order to use IBM Watson, you need to:
 To make the tests pass you will need to fill out the file: `config.js` inside the tests folder. The file should look something like this:
 
 ```
-//For every service you use through Watson, IBM will provide you with a separate set of OAuth credentials.
 var config = {
     translateConfig : {
         service_url:          '...',
