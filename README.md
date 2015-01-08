@@ -51,8 +51,9 @@ P.user = ( 'userName' , function (data, err) {
 });
 
 //
-//  Watson provides a personality assessment of the combined input of tweets in a user's home timeline
-//  Includes tweets from friends and accounts the user is following, and their retweets
+//  Watson provides a personality assessment of the combined input of tweets in a 
+//user's home timeline. Includes tweets from friends and accounts the user is following, 
+//and their retweets
 //
 var params1 = { 
                 count: 100, 
@@ -64,7 +65,8 @@ P.userHome( params1, function (data, err) {
 });
 
 //
-//  Search Twitter with a (required) keyword. Accepts all of Twitter's optional search parameters and a few additional ones we've created for your convenience.
+//  Search Twitter with a (required) keyword. Accepts all of Twitter's optional search 
+//parameters and a few additional ones we've created for your convenience.
 //
 var params2 = { 
                 q: '#JavaScript', 
@@ -76,7 +78,9 @@ P.searchTweet = function( params2 , function (data, err) {
 });
 
 //
-//  Grab a number of Tweets in a specified language and get back both the original text and its translation in another destination language. Most of the search parameters available here are the same as those in our searchTweet method.
+//  Grab a number of Tweets in a specified language and get back both the original text and its 
+//translation in another destination language. Most of the search parameters available 
+//here are the same as those in our searchTweet method.
 //
 
 var params3 = { 
@@ -86,7 +90,7 @@ var params3 = {
                 outputType: 'text' 
               };
 
-P.translation( params3 , function (data, err) {
+P.translate( params3 , function (data, err) {
     console.log(data, err);
 });
 
@@ -94,23 +98,23 @@ P.translation( params3 , function (data, err) {
 
 # personify API:
 
-##`P.user( 'input', callback )`
+#####`P.user( 'input', callback )`
 
 **'input'**
 
 Required. Object type is a string representing a Twitter username. Optionally you can include an '@' before the username.
 
-##`P.userHome( { params }, callback )`
+#####`P.userHome( { params }, callback )`
 
 **params**
 
 Key-value pairs are optional, but at least empty object literal brackets are required. 
 
-##`P.searchTweet( { q: 'input', additional params }, callback )`
+#####`P.searchTweet( { q: 'input', additional params }, callback )`
 
 The 'q' key and its associated value, which is a string, are required. The string can be any word you may use to search in Twitter's search bar. Any additional key-value pairs are optional.
 
-## `P.translate( { q: 'input', fromLanguage: 'en', toLanguage: 'fr', outputType: 'json' }, callback )`
+##### `P.translate( { q: 'input', fromLanguage: 'en', toLanguage: 'fr', outputType: 'json' }, callback )`
 
 All key-value pairs inside of the object passed as the first argument are required. 
 
