@@ -2,6 +2,12 @@ var https = require('https');
 var url = require('url');
 var querystring = require('querystring');
 
+// setup middleware
+
+// app.use(express.static(__dirname + '/public')); //setup static public directory
+// app.set('view engine', 'jade');
+// app.set('views', __dirname + '/views'); //optional since express defaults to CWD/views
+
 //module.exports.translate parameters info
 //language: enus, frfr, arar, ptbr, eses 
 //outputType: txt, json, xml
@@ -42,10 +48,10 @@ var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toSt
 
   var request_data = { 
     'txt': data, 
-    'sid': 'mt-eses-enus',
-    'rt': 'text' // return type e.g. json, text or xml
+    'sid': language,
+    'rt': outputType // return type e.g. json, text or xml
   };
-  console.log('request_data', request_data)
+  //console.log('request_data', request_data)
   var parts = url.parse(service_url);
   // create the request options to POST our question to Watson
   var options = { host: parts.hostname,
@@ -85,6 +91,3 @@ var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toSt
   watson_req.end();
 
 }
-
-
-

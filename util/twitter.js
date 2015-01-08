@@ -98,14 +98,14 @@ var Personify = function(auth) {
       return wantedChars;
     };
 
-    T.get('search/tweets', {q: 'charlie', lang: 'fr'}, function(err, data, response) {
+    T.get('search/tweets', {q: 'charlie', lang: 'ar'}, function(err, data, response) {
    
       if (data) {
         for(var i = 0; i < data.statuses.length; i++) {
           // accumulate the data (each tweet as a text) received from twitter
           twitterData += filterTweet(data.statuses[i].text);
         }
-        translateModule.translate(auth, twitterData, 'mt-frfr-enus', 'txt', callback);
+        translateModule.translate(auth, twitterData , 'mt-arar-enus', 'text', callback);
       } else {
         console.log(data)
         callback(data, err);
