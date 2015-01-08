@@ -14,7 +14,7 @@ var Personify = function(auth) {
           access_token        :  auth.twitterConfig.access_token,
           access_token_secret :  auth.twitterConfig.access_token_secret,
   });
-  
+
     // create a profile request with the text and the htpps options and call it
     // `req.body.subject` is the subject that was entered by the end user
     // TODO: to have the end user enter the date
@@ -91,7 +91,7 @@ var Personify = function(auth) {
 
 //Translate methods below thisline-----------------------
 
-  Personify.prototype.translation = function (){
+  Personify.prototype.translation = function (callback){
    T.get('search/tweets', {q: '#lakers', lang: 'es'}, function(err, data, response) {
    
       if (data) {
@@ -105,10 +105,8 @@ var Personify = function(auth) {
         callback(data, err);
       }
     });
+  //console.log('Hello World!')
   }
-
-
-
 
 };
 

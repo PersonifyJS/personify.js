@@ -4,8 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-//var Personify = require('personify');
-var Personify = require('translate');
+var Personify = require('personify');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -30,10 +29,15 @@ app.use('/users', users);
 
 //Translate test code
 var P = new Personify({
-    watsonConfig : {
+    translateConfig : {
          service_url : "https://gateway.watsonplatform.net/laser/service/api/v1/smt",
          service_username : "54fa5070-8c12-4ab8-b5d4-c126279b5b2a",
          service_password : "WmlLWdYClQBm"
+    },
+    watsonConfig : {
+        service_url: "https://gateway.watsonplatform.net/systemu/service/",
+        service_username: "12312a68-fdff-4064-9928-eb088a960815",
+        service_password: "KUwy0neR5kpV"
     },
     twitterConfig : {
         consumer_key:         'nnnMzv63aJKbQgzF77vQLXCm0',
@@ -42,8 +46,10 @@ var P = new Personify({
         access_token_secret:  'ivIGOcV4OHxW9lRrW7pevEcxwtk2RDGzVSW6IdOqz9R0D'
     }
 });
-
-P.translation();
+//console.log(P)
+P.translation(function(data, err){
+    console.log(data, err);
+});
 
 
 
@@ -73,7 +79,7 @@ P.translation();
 //     }
 // });
 
-//user method is Twitter's user_timeline get request
+// //user method is Twitter's user_timeline get request
 // P.user('fr332th1nk', function(data, err){
 //     console.log(data);
 // });
