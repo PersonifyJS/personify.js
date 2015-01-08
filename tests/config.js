@@ -1,7 +1,12 @@
 // In order to run 'npm test' you will need to paste your Watson and Twitter 
 // credentials
 var config = {
-    watsonConfig : {
+    translateConfig : {
+         service_url : "https://gateway.watsonplatform.net/laser/service/api/v1/smt",
+         service_username : "54fa5070-8c12-4ab8-b5d4-c126279b5b2a",
+         service_password : "WmlLWdYClQBm"
+    },
+    personalityConfig : {
         service_url: "https://gateway.watsonplatform.net/systemu/service/",
         service_username: "12312a68-fdff-4064-9928-eb088a960815",
         service_password: "KUwy0neR5kpV"

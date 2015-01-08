@@ -76,14 +76,18 @@ var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toSt
     result.on('end', function() {
       // add the response to the request so we can show the text and the response in the template
       request_data.translation = responseString;
-      console.log('request',request_data);
-      //return res.render('index',request_data);
+      var dataToClient = { original: request_data.txt, translation: request_data.translation }
+      if (dataToClient.original.length < 1) {
+        callback(null, 'There was an error whith your request!');
+      } else {
+        callback(dataToClient, null);
+      }
     })
 
   });
 
   watson_req.on('error', function(e) {
-    //return res.render('index', {'error': e.message})
+    callback(null, e)
   });
 
   // create the request to Watson
