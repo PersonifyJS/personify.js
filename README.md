@@ -69,7 +69,7 @@ P.searchTweet = function( params2 , function (data, err) {
 });
 
 //
-//  
+//  Grab a number of Tweets in a specified language and get back both the original text and its translation in another destination language. Most of the search parameters available here are the same as those in our searchTweet method.
 //
 
 var params3 = { 
@@ -77,7 +77,7 @@ var params3 = {
                 fromLanguage: 'ar', //Translate from Arabic
                 toLanguage: 'en',   //to English
                 outputType: 'text' 
-              }
+              };
 
 P.translation( params3 , function (data, err) {
     console.log(data, err);
@@ -132,8 +132,14 @@ In order to use IBM Watson, you need to:
 To make the tests pass you will need to fill out the file: `config.js` inside the tests folder. The file should look something like this:
 
 ```
+//For every service you use through Watson, IBM will provide you with a separate set of OAuth credentials.
 var config = {
-    watsonConfig : {
+    translateConfig : {
+        service_url:          '...',
+        service_username:     '...',
+        service_password:     '...'
+    },
+    personalityConfig : {
         service_url:          '...',
         service_username:     '...',
         service_password:     '...'
