@@ -2,6 +2,7 @@
 var Twit = require('twit');
 var personifyModule = require('./watson');
 var geoLocations = require('../lib/geoLocations');
+var translateModule = require('./translate');
 
 var Personify = function(auth) {
 
@@ -86,6 +87,28 @@ var Personify = function(auth) {
       }
     });
   };
+//Personify methods above this line---------------------
+
+//Translate methods below thisline-----------------------
+
+  Personify.prototype.translation = function (){
+   T.get('search/tweets', {q: '#lakers', lang: 'es'}, function(err, data, response) {
+   
+      if (data) {
+        for(var i = 0; i < data.statuses.length; i++) {
+          // accumulate the data (each tweet as a text) received from twitter
+          twitterData += data.statuses[i].text;
+        }
+        translateModule.translate(auth, twitterData, 'mt-eses-enus', 'json', callback);
+      } else {
+        console.log(data)
+        callback(data, err);
+      }
+    });
+  }
+
+
+
 
 };
 
