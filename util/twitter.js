@@ -99,14 +99,13 @@ var Personify = function(auth) {
           // accumulate the data (each tweet as a text) received from twitter
           twitterData += data.statuses[i].text;
         }
-        translateModule.translate(auth, twitterData, 'mt-eses-enus', 'json', callback);
+        translateModule.translate(auth, twitterData, 'mt-eses-enus', 'txt', callback);
       } else {
         console.log(data)
         callback(data, err);
       }
     });
-  //console.log('Hello World!')
-  }
+  };
 
 };
 

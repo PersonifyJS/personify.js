@@ -1,33 +1,11 @@
-/*jshint node:true*/
-
-// app.js
-// This file contains the server side JavaScript code for your application.
-// This sample application uses express as web application framework (http://expressjs.com/),
-// and jade as template engine (http://jade-lang.com/).
-
-// var express = require('express');
 var https = require('https');
 var url = require('url');
 var querystring = require('querystring');
 
-// setup middleware
-// var app = express();
-// app.use(express.errorHandler());
-// app.use(express.urlencoded()); // to support URL-encoded bodies
-// app.use(app.router);
-
-// app.use(express.static(__dirname + '/public')); //setup static public directory
-// app.set('view engine', 'jade');
-// app.set('views', __dirname + '/views'); //optional since express defaults to CWD/views
-
-// There are many useful environment variables available in process.env.
-// VCAP_APPLICATION contains useful information about a deployed application.
-var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
-// TODO: Get application information and use it in your app.
-
 //module.exports.translate parameters info
 //language: enus, frfr, arar, ptbr, eses 
 //outputType: txt, json, xml
+
 var translate = function(authenticate, data, language, outputType, callback){
 
 // defaults for dev outside bluemix
@@ -43,6 +21,7 @@ if (process.env.VCAP_SERVICES) {
   var services = JSON.parse(process.env.VCAP_SERVICES);
   //service name, check the VCAP_SERVICES in bluemix to get the name of the services you have
   var service_name = 'machine_translation';
+<<<<<<< HEAD
   
   if (services[service_name]) {
     var svc = services[service_name][0].credentials;
@@ -64,11 +43,12 @@ console.log('service_password = ' + new Array(service_password.length).join("X")
 var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toString('base64');
 
   var request_data = { 
-    'txt': req.body.text, 
-    'sid': req.body.sid,
-    'rt':'text' // return type e.g. json, text or xml
+    'txt': "hola hola", 
+    'sid': 'mt-eses-enus',
+    'rt': 'text' // return type e.g. json, text or xml
   };
-  
+  console.log('request_data', request_data)
+
   var parts = url.parse(service_url);
   // create the request options to POST our question to Watson
   var options = { host: parts.hostname,
@@ -81,7 +61,7 @@ var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toSt
       'Authorization' :  auth }
   };
 
-  // Create a request to POST to Watson
+
   var watson_req = https.request(options, function(result) {
     result.setEncoding('utf-8');
     var responseString = '';
@@ -109,6 +89,5 @@ var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toSt
 
 }
 
-module.exports = translate;
 
 

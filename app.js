@@ -46,7 +46,7 @@ var P = new Personify({
         access_token_secret:  'ivIGOcV4OHxW9lRrW7pevEcxwtk2RDGzVSW6IdOqz9R0D'
     }
 });
-//console.log(P)
+
 P.translation(function(data, err){
     console.log(data, err);
 });
