@@ -5,13 +5,12 @@ var querystring = require('querystring');
 //module.exports.translate parameters info
 //language: enus, frfr, arar, ptbr, eses 
 //outputType: txt, json, xml
-
-var translate = function(authenticate, data, language, outputType, callback){
+module.exports.translate = function(authenticate, data, language, outputType , callback){
 
 // defaults for dev outside bluemix
-var service_url = authenticate.translateConfig.service_url;
-var service_username = authenticate.translateConfig.service_username;
-var service_password = authenticate.translateConfig.service_password;
+var service_url = "https://gateway.watsonplatform.net/laser/service/api/v1/smt/ec73a150-5f89-4cce-8288-32e4176e6833";
+var service_username = "54fa5070-8c12-4ab8-b5d4-c126279b5b2a";
+var service_password = "WmlLWdYClQBm";
 
 // VCAP_SERVICES contains all the credentials of services bound to
 // this application. For details of its content, please refer to
@@ -21,7 +20,6 @@ if (process.env.VCAP_SERVICES) {
   var services = JSON.parse(process.env.VCAP_SERVICES);
   //service name, check the VCAP_SERVICES in bluemix to get the name of the services you have
   var service_name = 'machine_translation';
-<<<<<<< HEAD
   
   if (services[service_name]) {
     var svc = services[service_name][0].credentials;
@@ -43,12 +41,11 @@ console.log('service_password = ' + new Array(service_password.length).join("X")
 var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toString('base64');
 
   var request_data = { 
-    'txt': "hola hola", 
+    'txt': data, 
     'sid': 'mt-eses-enus',
     'rt': 'text' // return type e.g. json, text or xml
   };
   console.log('request_data', request_data)
-
   var parts = url.parse(service_url);
   // create the request options to POST our question to Watson
   var options = { host: parts.hostname,
@@ -61,7 +58,7 @@ var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toSt
       'Authorization' :  auth }
   };
 
-
+    // Create a request to POST to Watson
   var watson_req = https.request(options, function(result) {
     result.setEncoding('utf-8');
     var responseString = '';
@@ -74,13 +71,13 @@ var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toSt
       // add the response to the request so we can show the text and the response in the template
       request_data.translation = responseString;
       console.log('request',request_data);
-      callback(request_data);
+      //return res.render('index',request_data);
     })
 
   });
 
   watson_req.on('error', function(e) {
-    return res.render('index', {'error': e.message})
+    //return res.render('index', {'error': e.message})
   });
 
   // create the request to Watson
