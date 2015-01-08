@@ -14,7 +14,7 @@ var Personify = function(auth) {
           access_token        :  auth.twitterConfig.access_token,
           access_token_secret :  auth.twitterConfig.access_token_secret,
   });
-  
+
     // create a profile request with the text and the htpps options and call it
     // `req.body.subject` is the subject that was entered by the end user
     // TODO: to have the end user enter the date
@@ -106,7 +106,6 @@ var Personify = function(auth) {
       }
     });
   };
-
 
 };
 
