@@ -7,7 +7,7 @@ Supports Twitter REST API.
 #Installing
 
 ```
-npm install personify
+npm install personify --save
 ```
 
 ##Usage:

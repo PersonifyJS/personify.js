@@ -7,13 +7,13 @@ var flatten = require('../lib/flatten');
 var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
 
 // exporting the watson module to be required by the end user
-module.exports.watson =  function(auth, data, callback) {
+module.exports.watson =  function(authenticate, data, callback) {
 
   // var W = new Watson({config}); // this is what the end user gonna put
 // defaults for dev outside bluemix
-var service_url = auth.watsonConfig.service_url;
-var service_username = auth.watsonConfig.service_username;
-var service_password = auth.watsonConfig.service_password;
+var service_url = authenticate.watsonConfig.service_url;
+var service_username = authenticate.watsonConfig.service_username;
+var service_password = authenticate.watsonConfig.service_password;
 
 if (process.env.VCAP_SERVICES) {
   console.log('Parsing VCAP_SERVICES');
@@ -114,7 +114,6 @@ var create_profile_request = function(options, content, res) {
     profile_req.on('error', function(e) {
       callback(e,null);
     });
-  };
 
     profile_req.write(JSON.stringify(post_data));
     profile_req.end();
