@@ -91,7 +91,7 @@ var Personify = function(auth) {
 
 //Translate methods below thisline-----------------------
 
-  Personify.prototype.translation = function (){
+  Personify.prototype.translation = function (callback){
    T.get('search/tweets', {q: '#lakers', lang: 'es'}, function(err, data, response) {
    
       if (data) {
@@ -99,15 +99,13 @@ var Personify = function(auth) {
           // accumulate the data (each tweet as a text) received from twitter
           twitterData += data.statuses[i].text;
         }
-        translateModule.translate(auth, twitterData, 'mt-eses-enus', 'json', callback);
+        translateModule.translate(auth, twitterData, 'mt-eses-enus', 'txt', callback);
       } else {
         console.log(data)
         callback(data, err);
       }
     });
-  }
-
-
+  };
 
 
 };

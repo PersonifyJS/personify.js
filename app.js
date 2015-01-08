@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //var Personify = require('personify');
-var Personify = require('translate');
+var Personify = require('personify');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -43,7 +43,9 @@ var P = new Personify({
     }
 });
 
-P.translation();
+P.translation(function(data, err){
+    console.log(data, err);
+});
 
 
 
