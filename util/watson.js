@@ -8,12 +8,12 @@ var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
 
 // exporting the watson module to be required by the end user
 module.exports.watson =  function(authenticate, data, callback) {
-
-  // var W = new Watson({config}); // this is what the end user gonna put
+ 
+// var W = new Watson({config}); // this is what the end user gonna put
 // defaults for dev outside bluemix
-var service_url = authenticate.watsonConfig.service_url;
-var service_username = authenticate.watsonConfig.service_username;
-var service_password = authenticate.watsonConfig.service_password;
+var service_url = authenticate.personalityConfig.service_url;
+var service_username = authenticate.personalityConfig.service_username;
+var service_password = authenticate.personalityConfig.service_password;
 
 if (process.env.VCAP_SERVICES) {
   console.log('Parsing VCAP_SERVICES');

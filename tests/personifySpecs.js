@@ -15,7 +15,7 @@ describe('Personify config', function(){
     (personify.user).should.be.type('function');
     (personify.userHome).should.be.type('function');
     (personify.searchTweets).should.be.type('function');
-    // TODO: Add more functions
+    (personify.translate).should.be.type('function');
   });
 
   it('personify should throw an error when no config is passed', function(done){
@@ -69,7 +69,7 @@ describe('personify methods', function(){
     });
   });
 
-  it('personify.searchTweets funciton should accept geocode params', function(done){
+  it('personify.searchTweets function should accept geocode params', function(done){
     var personify = new Personify(config);
     personify.searchTweets({ q: "#nike", count: 100, geocode: "NY" }, function(data, err){
       done();
@@ -77,9 +77,35 @@ describe('personify methods', function(){
     });
   });
 
-  it('personify.searchTweets funciton should NOT accept random geocode params', function(done){
+  xit('personify.searchTweets function should NOT accept random geocode params', function(done){
     var personify = new Personify(config);
     personify.searchTweets({ q: "#nike", count: 100, geocode: "XY" }, function(data, err){
+      done();
+      (err).should.be.ok;
+    });
+  });
+
+  it('personify.translate function should work with the right params', function(done){
+    var personify = new Personify(config);
+    var params =  { q: 'charlie',
+                    fromLanguage: 'es',
+                    toLanguage: 'en',
+                    outputType: 'text'
+                  };
+    personify.translate(params, function(data, err){
+      done();
+      (err === null).should.be.true;
+    });
+  });
+
+  it('personify.translate function should raise an error without the right params', function(done){
+    var personify = new Personify(config);
+    var params =  { q: 'charlie',
+                    fromLanguage: 'blahblah',
+                    toLanguage: 'en',
+                    outputType: 'blahblah'
+                  };
+    personify.translate(params, function(data, err){
       done();
       (err).should.be.ok;
     });

@@ -60,20 +60,19 @@ var Personify = function(auth) {
 
   Personify.prototype.searchTweets = function(params, callback) {
  
-    var searchParams = params;
     var geotype;
  
-    if (typeof searchParams.geocode === 'string') {
-      if (geoLocations[searchParams.geocode]) {
-        geotype = geoLocations[searchParams.geocode].geo;
-        searchParams.geocode = geotype;
+    if (typeof params.geocode === 'string') {
+      if (geoLocations[params.geocode]) {
+        geotype = geoLocations[params.geocode].geo;
+        params.geocode = geotype;
       } else {
         callback(null, 'Geo location is not valid!')
       }
       
     }
  
-    T.get('search/tweets', searchParams, function(err, data, response) {
+    T.get('search/tweets', params, function(err, data, response) {
    
       if (data) {
         for(var i = 0; i < data.statuses.length; i++) {
@@ -91,29 +90,39 @@ var Personify = function(auth) {
 
 //Translate methods below thisline-----------------------
 
-  Personify.prototype.translation = function (callback){
+  Personify.prototype.translate = function (params, callback){
+    //langs key is Twitter language code, value is Watson language code
+    var langs = {
+      ar: 'arar',  //Arabic
+      en: 'enus',  //English
+      fr: 'frfr',  //French
+      pt: 'ptbr',  //Portuguese
+      es: 'eses'   //Spanish
+    };
+    // adding extra key-value pair in params for Twitter language
+    params.lang = params.fromLanguage;
 
+    var translateCode = 'mt-'+ langs[params.fromLanguage] + '-' + langs[params.toLanguage];
+ 
     var filterTweet = function(tweet) {
       var wantedChars = tweet.replace(/[^\u1f600-\u1f64f]/g, ' ');
       return wantedChars;
     };
-
-    T.get('search/tweets', {q: 'charlie', lang: 'ar'}, function(err, data, response) {
+ 
+    T.get('search/tweets', params, function(err, data, response) {
    
       if (data) {
         for(var i = 0; i < data.statuses.length; i++) {
           // accumulate the data (each tweet as a text) received from twitter
           twitterData += filterTweet(data.statuses[i].text);
         }
-        translateModule.translate(auth, twitterData , 'mt-arar-enus', 'text', callback);
+        translateModule.translate(auth, twitterData , translateCode, params.outputType, callback);
       } else {
         console.log(data)
         callback(data, err);
       }
     });
   };
-
-
 };
 
 module.exports = Personify;
