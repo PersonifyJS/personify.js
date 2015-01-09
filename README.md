@@ -135,8 +135,8 @@ Go here to create a Twitter app and get OAuth credentials (if you haven't alread
 In order to use IBM Watson, you need to:
 - Register for an IBM Bluemix account: http://www-01.ibm.com/software/bluemix/
 - Create an App
-- Add a User Modeling service
-- From there you can get your credentials
+- Add User Modeling and/ or Machine Translation service(s)
+- From there, IBM will provide your credentials
 
 
 #How do I run the tests?
