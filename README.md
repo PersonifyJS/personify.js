@@ -19,28 +19,29 @@ npm install personify --save
 ```javascript
 var Personify = require('personify');
 
-//For every service you use through Watson, IBM will provide you with a separate set of OAuth credentials. See below to find out where to get these credentials.
+// For every service you use through Watson, IBM will provide you with a separate set of 
+// OAuth credentials. See below to find out where to get these credentials.
 var config = {
-//example credentials for Watson Machine Translation service
+// example credentials for Watson Machine Translation service
     translateConfig : {
         service_url:          '...',
         service_username:     '...',
         service_password:     '...'
     },
-//example credentials for Watson User Modeling service
+// example credentials for Watson User Modeling service
     personalityConfig : {
         service_url:          '...',
         service_username:     '...',
         service_password:     '...'
     },
-//example credentials for Twitter API
+// example credentials for Twitter API
     twitterConfig : {
         consumer_key:         '...',
         consumer_secret:      '...',
         access_token:         '...',
         access_token_secret:  '...'
     }
-}
+};
 
 //
 //  Use Watson to discover personality traits, values and needs for a Twitter user
@@ -52,8 +53,8 @@ P.user = ( 'userName' , function (data, err) {
 
 //
 //  Watson provides a personality assessment of the combined input of tweets in a 
-//user's home timeline. Includes tweets from friends and accounts the user is following, 
-//and their retweets
+// user's home timeline. Includes tweets from friends and accounts the user is following, 
+// and their retweets
 //
 var params1 = { 
                 count: 100, 
@@ -66,7 +67,7 @@ P.userHome( params1, function (data, err) {
 
 //
 //  Search Twitter with a (required) keyword. Accepts all of Twitter's optional search 
-//parameters and a few additional ones we've created for your convenience.
+// parameters and a few additional ones we've created for your convenience.
 //
 var params2 = { 
                 q: '#JavaScript', 
@@ -79,8 +80,8 @@ P.searchTweet = function( params2 , function (data, err) {
 
 //
 //  Grab a number of Tweets in a specified language and get back both the original text and its 
-//translation in another destination language. Most of the search parameters available 
-//here are the same as those in our searchTweet method.
+// translation in another destination language. Most of the search parameters available 
+// here are the same as those in our searchTweet method.
 //
 
 var params3 = { 
@@ -160,7 +161,7 @@ var config = {
         access_token:         '...',
         access_token_secret:  '...'
     }
-}
+};
 
 module.exports = config;
 ```
