@@ -141,30 +141,7 @@ In order to use IBM Watson, you need to:
 
 #How do I run the tests?
 
-To make the tests pass you will need to fill out the file: `config.js` inside the tests folder. The file should look something like this:
-
-```
-var config = {
-    translateConfig : {
-        service_url:          '...',
-        service_username:     '...',
-        service_password:     '...'
-    },
-    personalityConfig : {
-        service_url:          '...',
-        service_username:     '...',
-        service_password:     '...'
-    },
-    twitterConfig : {
-        consumer_key:         '...',
-        consumer_secret:      '...',
-        access_token:         '...',
-        access_token_secret:  '...'
-    }
-};
-
-module.exports = config;
-```
+To make the tests pass you will need to fill out the file: `config.js` inside the tests folder. 
 
 To run the tests:
 
