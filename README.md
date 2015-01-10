@@ -53,7 +53,13 @@ var P = new Personify(config);
 // Use Watson to discover personality traits, values and needs for a Twitter user
 // '@' can be used before a username, but is not required (e.g. '@userName')
 //
-P.user = ( 'userName' , function (data, err) {
+
+var params1 = { 
+                screen_name: 'userName'
+                count: 100
+              };
+
+P.userPersonify( params1 , function (data, err) {
     console.log(data, err);
 });
 
@@ -62,12 +68,12 @@ P.user = ( 'userName' , function (data, err) {
 // user's home timeline. Includes tweets from friends and accounts the user is following, 
 // and their retweets
 //
-var params1 = { 
+var params2 = { 
                 count: 100, 
                 exclude_tweets: true 
               };
 
-P.userHome( params1, function (data, err) {
+P.homePersonify( params2, function (data, err) {
     console.log(data, err);
 });
 
@@ -75,12 +81,12 @@ P.userHome( params1, function (data, err) {
 // Search Twitter with a (required) keyword. Accepts all of Twitter's optional search 
 // parameters and a few additional ones we've created for your convenience.
 //
-var params2 = { 
+var params3 = { 
                 q: '#JavaScript', 
                 geoCode: 'San Francisco'
               };
 
-P.searchTweet = function( params2 , function (data, err) {
+P.searchPersonify( params3 , function (data, err) {
   console.log(data, err);
 });
 
@@ -90,14 +96,60 @@ P.searchTweet = function( params2 , function (data, err) {
 // here are the same as those in our searchTweet method.
 //
 
-var params3 = { 
+var params4 = { 
                 q: 'JavaScript', 
-                fromLanguage: 'ar', //Translate from Arabic
-                toLanguage: 'en',   //to English
-                outputType: 'text' 
+                fromLanguage: 'ar', // Translate from Arabic
+                toLanguage: 'en',   // to English
+                outputType: 'text'  // Choose from text, json or XML
               };
 
-P.translate( params3 , function (data, err) {
+P.searchTranslate( params4 , function (data, err) {
+    console.log(data, err);
+});
+
+//
+// Input a Twitter handle and get back their tweets translated
+//
+
+var params5 = {
+                screen_name: 'userName',
+                fromLanguage: 'en',
+                toLanguage: 'fr',
+                outputType: 'json'
+              };
+
+P.userTranslate( params5, function(data, err){
+    console.log(data, err);
+});
+
+//
+// Get tweets from your home timeline and have them translated into another language
+//
+
+var params6 = {
+                count: 150,
+                fromLanguage: 'en',
+                toLanguage: 'fr',
+                outputType: 'json'
+              };
+
+P.homeTranslate( params6, function(data, err){
+    console.log(data, err);
+});
+
+//
+// Find tweets talkng about the LHC using Twitter's Streaming API and 
+// translate them into another language
+//
+
+var params7 = {
+                track: 'Large Hadron Collider'
+                fromLanguage: 'en',
+                toLanguage: 'fr',
+                outputType: 'text'
+              };
+
+P.homeTranslate( params7, function(data, err){
     console.log(data, err);
 });
 
