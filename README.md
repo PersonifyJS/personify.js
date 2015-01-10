@@ -55,7 +55,6 @@ var P = new Personify(config);
 // Use Watson to discover personality traits, values and needs for a Twitter user
 // '@' can be used before a username, but is not required (e.g. '@userName')
 //
-
 var params1 = { 
                 screen_name: 'userName'
                 count: 100
@@ -97,7 +96,6 @@ P.searchPersonify( params3 , function (data, err) {
 // translation in another destination language. Most of the search parameters available 
 // here are the same as those in our searchTweet method.
 //
-
 var params4 = { 
                 q: 'JavaScript', 
                 fromLanguage: 'ar', // Translate from Arabic
@@ -112,7 +110,6 @@ P.searchTranslate( params4 , function (data, err) {
 //
 // Input a Twitter handle and get back their tweets translated
 //
-
 var params5 = {
                 screen_name: 'userName',
                 fromLanguage: 'en',
@@ -127,7 +124,6 @@ P.userTranslate( params5, function(data, err){
 //
 // Get tweets from your home timeline and have them translated into another language
 //
-
 var params6 = {
                 count: 150,
                 fromLanguage: 'en',
@@ -143,7 +139,6 @@ P.homeTranslate( params6, function(data, err){
 // Find tweets talkng about the LHC using Twitter's Streaming API and 
 // translate them into another language
 //
-
 var params7 = {
                 track: 'Large Hadron Collider'
                 fromLanguage: 'en',
