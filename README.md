@@ -45,6 +45,11 @@ var config = {
 };
 
 //
+// Instantiate a new Personify object and pass in OAth credentials
+//
+var P = new Personify(config);
+
+//
 // Use Watson to discover personality traits, values and needs for a Twitter user
 // '@' can be used before a username, but is not required (e.g. '@userName')
 //
