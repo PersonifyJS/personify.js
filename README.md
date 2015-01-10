@@ -9,6 +9,8 @@ Our current version implements:
 - Twitter REST API.
 - Twitter Streaming API.
 
+#
+
 #Installing
 
 ```
@@ -217,6 +219,12 @@ See
 ### To Do
 
 - Expand library with more Watson services
+
+### Development Team
+
+- [Essam Al Joubori](https://github.com/essamjoubori)
+- [Rohan Agrawal](https://github.com/rohanagrawal)
+- [Phil Elauria](https://github.com/philelauria)
 
 -------
 
