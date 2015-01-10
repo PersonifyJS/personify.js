@@ -149,7 +149,7 @@ var params7 = {
                 outputType: 'text'
               };
 
-P.homeTranslate( params7, function(data, err){
+P.streamTranslate( params7, function(data, err){
     console.log(data, err);
 });
 
