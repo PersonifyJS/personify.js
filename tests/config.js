@@ -2,9 +2,9 @@
 // credentials
 var config = {
     translateConfig : {
-         service_url : "https://gateway.watsonplatform.net/laser/service/api/v1/smt",
-         service_username : "54fa5070-8c12-4ab8-b5d4-c126279b5b2a",
-         service_password : "WmlLWdYClQBm"
+        service_url : "https://gateway.watsonplatform.net/laser/service/api/v1/smt",
+        service_username : "54fa5070-8c12-4ab8-b5d4-c126279b5b2a",
+        service_password : "WmlLWdYClQBm"
     },
     personalityConfig : {
         service_url: "https://gateway.watsonplatform.net/systemu/service/",

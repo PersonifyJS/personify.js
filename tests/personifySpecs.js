@@ -77,13 +77,17 @@ describe('personify methods', function(){
     });
   });
 
-  xit('personify.searchTweets function should NOT accept random geocode params', function(done){
+  it('personify.searchTweets function should NOT accept random geocode params', function(done){
     var personify = new Personify(config);
     personify.searchTweets({ q: "#nike", count: 100, geocode: "XY" }, function(data, err){
-      done();
       (err).should.be.ok;
+      done();
     });
   });
+  
+});
+
+describe('translation methods', function(){
 
   it('personify.translate function should work with the right params', function(done){
     var personify = new Personify(config);
@@ -93,8 +97,8 @@ describe('personify methods', function(){
                     outputType: 'text'
                   };
     personify.translate(params, function(data, err){
-      done();
       (err === null).should.be.true;
+      done();
     });
   });
 
@@ -106,10 +110,8 @@ describe('personify methods', function(){
                     outputType: 'blahblah'
                   };
     personify.translate(params, function(data, err){
-      done();
       (err).should.be.ok;
+      done();
     });
   });
-
-
 });

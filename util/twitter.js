@@ -68,8 +68,7 @@ var Personify = function(auth) {
         params.geocode = geotype;
       } else {
         callback(null, 'Geo location is not valid!')
-      }
-      
+      } 
     }
  
     T.get('search/tweets', params, function(err, data, response) {
