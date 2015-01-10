@@ -1,4 +1,3 @@
-// Twitter config
 var Twit = require('twit');
 var personifyModule = require('./watson');
 var geoLocations = require('../lib/geoLocations');
@@ -19,24 +18,26 @@ var Personify = function(auth) {
     // `req.body.subject` is the subject that was entered by the end user
     // TODO: to have the end user enter the date
 
-  Personify.prototype.user = function(twitterHandler, callback) {
-    //var userData = '';
-    T.get('statuses/user_timeline', { screen_name: twitterHandler, count: 100 },
-                             function(err, data, response) {
-                              if (data.length) {
-                                for (var i=0;i<data.length;i++){
-                                  twitterData += data[i].text;
-                                }
-                                personifyModule.watson(auth, twitterData, callback);
-                              } else {
-                                callback(data, err);
-                              }
-                              
+// ======================= Watson User Modeling and Twitter REST below =============================
+
+//Takes a twitter handle and returns a personality 
+  Personify.prototype.userPersonify = function(twitterHandle, callback) {
+
+    T.get('statuses/user_timeline', { screen_name: twitterHandle, count: 100 },
+         function(err, data, response) {
+          if (data.length) {
+            for (var i=0;i<data.length;i++){
+              twitterData += data[i].text;
+            }
+            personifyModule.watson(auth, twitterData, callback);
+          } else {
+            callback(data, err);
+          }
     });
   };
 
 //Returns a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. The home timeline is central to how most users interact with the Twitter service.
-  Personify.prototype.userHome = function(params, callback) {
+  Personify.prototype.homePersonify = function(params, callback) {
 
     var getData = function(data) {
       if (data) {
@@ -49,7 +50,7 @@ var Personify = function(auth) {
       }   
     }; 
 
-    if (params.length !== 0){
+    if (arguments[0].constructor === Object){
       T.get('statuses/home_timeline', params, function(err, data, response) { getData(data); });
     } else {
       T.get('statuses/home_timeline', function(err, data, response) { getData(data); });
@@ -58,8 +59,7 @@ var Personify = function(auth) {
 
   // return all tweets q: is required!
 
-  Personify.prototype.searchTweets = function(params, callback) {
- 
+  Personify.prototype.searchPersonify = function(params, callback) {
     var geotype;
  
     if (typeof params.geocode === 'string') {
@@ -73,7 +73,6 @@ var Personify = function(auth) {
     }
  
     T.get('search/tweets', params, function(err, data, response) {
-   
       if (data) {
         for(var i = 0; i < data.statuses.length; i++) {
           // accumulate the data (each tweet as a text) received from twitter
@@ -86,11 +85,21 @@ var Personify = function(auth) {
       }
     });
   };
-//Personify methods above this line---------------------
 
-//Translate methods below thisline-----------------------
+// ======================= Watson User Modeling and Twitter REST above =============================
 
-  Personify.prototype.translate = function (params, callback){
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Personify methods above this line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Translate methods below this line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// =============================== Helper functions for Translate methods below ====================
+
+//Take parameters object from user's method call 
+//(eg, arguments[0] in P.translate({q: '#nike', fromLanguage: 'ar', toLanguage: 'en', etc...}, callback))
+//and parse then reconstruct the language codes to send to Watson Machine Translate
+  var  createLangs = function(params){
+    var translateCode;
+
     //langs key is Twitter language code, value is Watson language code
     var langs = {
       ar: 'arar',  //Arabic
@@ -99,30 +108,103 @@ var Personify = function(auth) {
       pt: 'ptbr',  //Portuguese
       es: 'eses'   //Spanish
     };
+
     // adding extra key-value pair in params for Twitter language
     params.lang = params.fromLanguage;
 
-    var translateCode = 'mt-'+ langs[params.fromLanguage] + '-' + langs[params.toLanguage];
- 
+    //construct the string value that Machine Translate is looking for
+    translateCode = 'mt-'+ langs[params.fromLanguage] + '-' + langs[params.toLanguage];
+
+    return translateCode;
+  }
+
+// Remove all characters that Machine Translate will not process (like emojis)
+// Machine Translate will throw an error if wrong characters are sent to it
     var filterTweet = function(tweet) {
       var wantedChars = tweet.replace(/[^\u1f600-\u1f64f]/g, ' ');
       return wantedChars;
     };
- 
+
+// =============================== Helper functions for Translate methods above ====================
+
+// ======================= Watson Machine Translation and Twitter REST below =======================
+
+
+//Take a Twitter handle and get back a personality assessment
+  Personify.prototype.userTranslate = function(params, callback){
+    var translateCode = createLangs(params);
+
+    T.get('statuses/user_timeline', params,
+     function(err, data, response) {
+      if (data.length) {
+        for (var i=0;i<data.length;i++){
+          twitterData += filterTweet(data[i].text);
+        }
+        translateModule.translate(auth, twitterData, translateCode, params.outputType, callback);
+      } else {
+        callback(data, err);
+      }
+    });
+  }
+
+
+//Get tweets found in user'shome timeline and translate them to another language
+  Personify.prototype.homeTranslate = function(params, callback) {
+    var translateCode = createLangs(params);
+
+    var getData = function(data) {
+      if (data) {
+        for (var i = 0; i < data.length; i++){
+          twitterData += data[i].text;
+        }
+        translateModule.translate(auth, twitterData, translateCode, params.outputType, callback);
+      } else {
+        callback(null, 'No data found!')
+      }   
+    }; 
+
+    if (arguments[0].constructor === Object){
+      T.get('statuses/home_timeline', params, function(err, data, response) { getData(data); });
+    } else {
+      T.get('statuses/home_timeline', function(err, data, response) { getData(data); });
+    }
+  };
+
+
+  Personify.prototype.searchTranslate = function (params, callback){
+    var translateCode = createLangs(params);
+
     T.get('search/tweets', params, function(err, data, response) {
-   
       if (data) {
         for(var i = 0; i < data.statuses.length; i++) {
           // accumulate the data (each tweet as a text) received from twitter
           twitterData += filterTweet(data.statuses[i].text);
         }
-        translateModule.translate(auth, twitterData , translateCode, params.outputType, callback);
+        translateModule.translate(auth, twitterData, translateCode, params.outputType, callback);
       } else {
         console.log(data)
         callback(data, err);
       }
     });
   };
+
+// ======================= Watson Machine Translation and Twitter REST above =======================
+
+// ==================== Watson Machine Translation and Twitter Streaming below =====================
+
+  Personify.prototype.streamTranslate = function(params, callback){
+    var translateCode = createLangs(params);
+    var stream = T.stream('statuses/filter', { track : 'charlie', lang: 'es' });
+
+    stream.on('tweet', function (tweet) {
+      var texts = filterTweet(tweet.text);
+      translateModule.translate(auth, texts, translateCode, params.outputType, callback);
+    });
+  }
+
+// ==================== Watson Machine Translation and Twitter Streaming above =====================
+
+
 };
 
 module.exports = Personify;
