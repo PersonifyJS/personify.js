@@ -20,7 +20,7 @@ var Personify = function(auth) {
 
 // ======================= Watson User Modeling and Twitter REST below =============================
 
-//Takes a twitter handle and returns a personality 
+// Takes a twitter handle and return personality traits, needs and values in a JSON object
   Personify.prototype.userPersonify = function(twitterHandle, callback) {
 
     T.get('statuses/user_timeline', { screen_name: twitterHandle, count: 100 },
@@ -36,7 +36,9 @@ var Personify = function(auth) {
     });
   };
 
-//Returns a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow. The home timeline is central to how most users interact with the Twitter service.
+// Returns a collection of the most recent Tweets and retweets posted by the authenticating 
+// user and the users they follow. The home timeline is central to how most users interact with 
+// the Twitter service.
   Personify.prototype.homePersonify = function(params, callback) {
 
     var getData = function(data) {
@@ -57,8 +59,9 @@ var Personify = function(auth) {
     }
   };
 
-  // return all tweets q: is required!
 
+// Uses Twitter search/tweets GET request. Has all optional parameters available
+// plus additional quick and conventient state and city search from geoLocations.js file
   Personify.prototype.searchPersonify = function(params, callback) {
     var geotype;
  
@@ -129,7 +132,7 @@ var Personify = function(auth) {
 // ======================= Watson Machine Translation and Twitter REST below =======================
 
 
-//Take a Twitter handle and get back a personality assessment
+//Take a Twitter handle and get back Twitter account's tweets translated
   Personify.prototype.userTranslate = function(params, callback){
     var translateCode = createLangs(params);
 
@@ -169,7 +172,7 @@ var Personify = function(auth) {
     }
   };
 
-
+// Twitter search/tweets GET request combined with Watson Machine Translate
   Personify.prototype.searchTranslate = function (params, callback){
     var translateCode = createLangs(params);
 
