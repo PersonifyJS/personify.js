@@ -24,7 +24,7 @@ var Personify = function(auth) {
   Personify.prototype.userPersonify = function(twitterHandle, callback) {
 
     T.get('statuses/user_timeline', { screen_name: twitterHandle, count: 100 },
-         function(err, data, response) {
+        function(err, data, response) {
           if (data.length) {
             for (var i=0;i<data.length;i++){
               twitterData += data[i].text;
@@ -32,7 +32,7 @@ var Personify = function(auth) {
             personifyModule.watson(auth, twitterData, callback);
           } else {
             callback(data, err);
-          }
+        }
     });
   };
 
