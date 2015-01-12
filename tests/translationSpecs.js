@@ -54,7 +54,6 @@ describe('translation methods should work', function(){
                 fromLanguage: 'es', 
                 toLanguage: 'en', 
                 outputType: 'text',
-                //locations: m
               }, function(data, err) {
       if(err) throw err;
       done();
