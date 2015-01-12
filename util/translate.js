@@ -11,12 +11,12 @@ var querystring = require('querystring');
 //module.exports.translate parameters info
 //language: enus, frfr, arar, ptbr, eses 
 //outputType: txt, json, xml
-module.exports.translate = function(authenticate, data, language, outputType , callback){
+module.exports.translate = function(authenticate, data, language, outputType, callback){
 
 // defaults for dev outside bluemix
-var service_url = "https://gateway.watsonplatform.net/laser/service/api/v1/smt/ec73a150-5f89-4cce-8288-32e4176e6833";
-var service_username = "54fa5070-8c12-4ab8-b5d4-c126279b5b2a";
-var service_password = "WmlLWdYClQBm";
+var service_url = authenticate.translateConfig.service_url;
+var service_username = authenticate.translateConfig.service_username;
+var service_password = authenticate.translateConfig.service_password;
 
 // VCAP_SERVICES contains all the credentials of services bound to
 // this application. For details of its content, please refer to
@@ -33,16 +33,16 @@ if (process.env.VCAP_SERVICES) {
     service_username = svc.username;
     service_password = svc.password;
   } else {
-    console.log('The service '+service_name+' is not in the VCAP_SERVICES, did you forget to bind it?');
+    //console.log('The service '+service_name+' is not in the VCAP_SERVICES, did you forget to bind it?');
   }
 
 } else {
-  console.log('No VCAP_SERVICES found in ENV, using defaults for local development');
+  //console.log('No VCAP_SERVICES found in ENV, using defaults for local development');
 }
 
-console.log('service_url = ' + service_url);
-console.log('service_username = ' + service_username);
-console.log('service_password = ' + new Array(service_password.length).join("X"));
+// console.log('service_url = ' + service_url);
+// console.log('service_username = ' + service_username);
+// console.log('service_password = ' + new Array(service_password.length).join("X"));
 
 var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toString('base64');
 
@@ -87,7 +87,7 @@ var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toSt
   });
 
   watson_req.on('error', function(e) {
-    callback(null, e)
+    callback(null, querystring.stringify(e));
   });
 
   // create the request to Watson
