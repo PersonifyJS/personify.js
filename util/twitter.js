@@ -11,7 +11,7 @@ var Personify = function(auth) {
           consumer_key        :  auth.twitterConfig.consumer_key,
           consumer_secret     :  auth.twitterConfig.consumer_secret,
           access_token        :  auth.twitterConfig.access_token,
-          access_token_secret :  auth.twitterConfig.access_token_secret,
+          access_token_secret :  auth.twitterConfig.access_token_secret
   });
   
     // create a profile request with the text and the htpps options and call it
@@ -188,7 +188,7 @@ var Personify = function(auth) {
         callback(data, err);
       }
     });
-  };
+  }; 
 
 // ======================= Watson Machine Translation and Twitter REST above =======================
 
@@ -196,7 +196,7 @@ var Personify = function(auth) {
 
   Personify.prototype.streamTranslate = function(params, callback){
     var translateCode = createLangs(params);
-    var stream = T.stream('statuses/filter', { track : 'charlie', lang: 'es' });
+    var stream = T.stream('statuses/filter', { track : '#charlie', lang: 'es' });
 
     stream.on('tweet', function (tweet) {
       var texts = filterTweet(tweet.text);
