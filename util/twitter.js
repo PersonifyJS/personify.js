@@ -148,7 +148,7 @@ var Personify = function(auth) {
   }
 
 
-  //Get tweets found in user'shome timeline and translate them to another language
+  //Get tweets found in user's home timeline and translate them to another language
   Personify.prototype.homeTranslate = function(params, callback) {
     var translateCode = createLangs(params);
 
@@ -194,7 +194,7 @@ var Personify = function(auth) {
 
   Personify.prototype.streamTranslate = function(params, callback){
     var translateCode = createLangs(params);
-    var stream = T.stream('statuses/filter', params);
+    var stream = T.stream('statuses/filter', { track : params.track, language : params.fromLanguage });
 
     stream.on('tweet', function (tweet) {
       var texts = filterTweet(tweet.text);
@@ -203,7 +203,6 @@ var Personify = function(auth) {
   }
 
 // ==================== Watson Machine Translation and Twitter Streaming above =====================
-
 
 };
 
