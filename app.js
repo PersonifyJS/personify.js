@@ -61,7 +61,7 @@ var obj = {
 
 // var m = ['-118.8672', '14.5329', '-86.7034', '32.7186'];
 
-var params =  { /*q: '#jesuischarlie', */
+var params =  { q: '#jesuischarlie', 
                 fromLanguage: 'es', 
                 toLanguage: 'en', 
                 outputType: 'text',
