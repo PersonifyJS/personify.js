@@ -1,14 +1,30 @@
 {
   "name": "personify",
-  "description": "",
+  "description": "A JavaScript based library that allows easy access to IBM Watson features utilizing Twitter data",
   "version": "1.0.0",
   "main": "./util/personify",
   "author": {
-    "name": ""
+    "name": "Essam Al Joubori, Phil Elauria, Rohan Agrawal"
   },
+  "keywords": [
+    "watson",
+    "twitter",
+    "bluemix",
+    "user modeling",
+    "translation",
+    "machine translation",
+    "big five personality",
+    "values",
+    "needs",
+    "sentiment analysis"
+  ],
+  "license": "MIT",
   "dependencies": {
     "chai": "^1.10.0",
     "twit": "^1.1.18"
+  },
+  "bugs": {
+    "url": "https://github.com/PersonifyJS/personify.js/issues"
   },
   "devDependencies": {
     "async": "0.2.9",
@@ -17,6 +33,7 @@
     "mocha": "^2.1.0",
     "should": "^4.4.2"
   },
+  "homepage": "http://personifyjs.github.io/",
   "scripts": {
     "test": "./node_modules/.bin/mocha tests/* -t 70000 -R spec --bail"
   }
