@@ -7,6 +7,7 @@
     "name": ""
   },
   "dependencies": {
+    "chai": "^1.10.0",
     "twit": "^1.1.18"
   },
   "devDependencies": {

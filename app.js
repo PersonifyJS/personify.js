@@ -65,6 +65,7 @@ var params =  { q: '#jesuischarlie',
                 fromLanguage: 'es', 
                 toLanguage: 'en', 
                 outputType: 'text',
+                stop: 3000
                 //locations: m
               };
 //documentation needs to point
@@ -75,9 +76,9 @@ var params =  { q: '#jesuischarlie',
 //     console.log(data);
 // });
 
-// P.streamTranslate(params, function(data, err){
-//     console.log(data)
-// });
+P.streamTranslate(params, function(data, err){
+    console.log(data)
+});
 
 // //user method is Twitter's user_timeline get request
 // P.userPersonify('fr332th1nk', function(data, err){

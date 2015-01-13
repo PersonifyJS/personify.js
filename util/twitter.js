@@ -200,6 +200,11 @@ var Personify = function(auth) {
       var texts = filterTweet(tweet.text);
       translateModule.translate(auth, texts, translateCode, params.outputType, callback);
     });
+
+    stream.on('error', function(err){
+      callback(null, err);
+    });
+
   }
 
 // ==================== Watson Machine Translation and Twitter Streaming above =====================
