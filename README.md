@@ -11,7 +11,7 @@ Our current version implements:
 
 #
 
-#Installing
+##Installing
 
 ```
 npm install personify --save
@@ -47,7 +47,8 @@ var config = {
 };
 
 //
-// Instantiate a new Personify object and pass in OAth credentials
+// Instantiate a new Personify object and pass in OAth credentials 
+// inside of an object literal
 //
 var P = new Personify(config);
 
@@ -60,8 +61,8 @@ var params1 = {
                 count: 100
               };
 
-P.userPersonify( params1 , function (data, err) {
-    console.log(data, err);
+P.userPersonify( params1 , function (data, error) {
+    console.log(data, error);
 });
 
 //
@@ -74,8 +75,8 @@ var params2 = {
                 exclude_tweets: true 
               };
 
-P.homePersonify( params2, function (data, err) {
-    console.log(data, err);
+P.homePersonify( params2, function (data, error) {
+    console.log(data, error);
 });
 
 //
@@ -87,8 +88,8 @@ var params3 = {
                 geoCode: 'San Francisco'
               };
 
-P.searchPersonify( params3 , function (data, err) {
-  console.log(data, err);
+P.searchPersonify( params3 , function (data, error) {
+  console.log(data, error);
 });
 
 //
@@ -103,8 +104,8 @@ var params4 = {
                 outputType: 'text'  // Choose from text, json or XML
               };
 
-P.searchTranslate( params4 , function (data, err) {
-    console.log(data, err);
+P.searchTranslate( params4 , function (data, error) {
+    console.log(data, error);
 });
 
 //
@@ -117,8 +118,8 @@ var params5 = {
                 outputType: 'json'
               };
 
-P.userTranslate( params5, function(data, err){
-    console.log(data, err);
+P.userTranslate( params5, function(data, error){
+    console.log(data, error);
 });
 
 //
@@ -131,12 +132,12 @@ var params6 = {
                 outputType: 'json'
               };
 
-P.homeTranslate( params6, function(data, err){
-    console.log(data, err);
+P.homeTranslate( params6, function(data, error){
+    console.log(data, error);
 });
 
 //
-// Find tweets talkng about the LHC using Twitter's Streaming API and 
+// Find public tweets talkng about the Large Hadron Collider using Twitter's Streaming API and 
 // translate them into another language
 //
 var params7 = {
@@ -146,44 +147,53 @@ var params7 = {
                 outputType: 'text'
               };
 
-P.streamTranslate( params7, function(data, err){
-    console.log(data, err);
+P.streamTranslate( params7, function(data, error){
+    console.log(data, error);
 });
 
 ```
 
-# personify API:
+## personify API:
 
-######`P.userPersonify( 'input', callback )`
+##### var P = new Personify( config )
 
-**'input'**
+Instantiate a new Personify and pass in a config.
 
-Required. Object type is a string representing a Twitter username. Optionally you can include an '@' before the username.
+##### config
+Type: `Object`
 
-######`P.homePersonify( [params], callback )`
+At least one set of OAth credentials from both Twitter and IBM Bluemix are required to use the services personify.js leverages for you.
 
-**params**
+###### P.userPersonify( 'userName' , callback ) 
+`'userName'`
+Type: `String`
 
-Key-value pairs are optional, but at least empty object literal brackets are required. 
+Required. Represents a Twitter handle. Optionally you can include an '@' before the username.
 
-######`P.searchPersonify( { q: 'input', [additional params] }, callback )`
+###### P.homePersonify( [params] , callback ) 
+`[params]`
+Type: `Object`
 
-The 'q' key and its associated value, which is a string, are required. The string can be any word you may use to search in Twitter's search bar. Any additional key-value pairs are optional.
+Key-value pairs inside of [params] are optional, but at least an empty object literal is required. 
 
-###### `P.searchTranslate( { q: 'input', fromLanguage: 'en', toLanguage: 'fr', outputType: 'json' }, callback )`
+###### P.searchPersonify( { q: 'input', [params] }, callback ) 
 
-All key-value pairs inside of the object passed as the first argument are required. 
+The 'q' key and its associated value, which is a string, are required. The string can be any word you may use to search in Twitter's search bar. Any additional search parameters are optional.
 
-**callback**
+######  P.searchTranslate( { q: 'input', fromLanguage: 'en', toLanguage: 'fr', outputType: 'json' }, callback ) 
 
-`function (data, err)`
+All keys shown in searchTranslate are required. 
 
-- `data` is the parsed data received from IBM Watson.
+###### callback
+
+Type: `Function`
+
+- callback takes two parameters, data and error, in that order. 
 - callback is required for all methods. 
 
 -------
 
-#Find your OAuth credentials
+##Find your OAuth credentials
 
 Go here to create a Twitter app and get OAuth credentials (if you haven't already): https://dev.twitter.com/apps/new
 
@@ -194,7 +204,7 @@ In order to use IBM Watson, you need to:
 - From there, IBM will provide your credentials
 
 
-#How do I run the tests?
+##How do I run the tests?
 
 To make the tests pass you will need to fill out the file: `config.js` inside the tests folder. 
 
@@ -204,18 +214,18 @@ To run the tests:
 npm test
 ```
 
-### Contributing
+## Contributing
 
 See 
 
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [STYLE-GUIDE.md](STYLE-GUIDE.md) 
 
-### To Do
+## To Do
 
 - Expand library with more Watson services
 
-### Development Team
+## Development Team
 
 - [Essam Al Joubori](https://github.com/essamjoubori)
 - [Rohan Agrawal](https://github.com/rohanagrawal)
@@ -225,6 +235,5 @@ See
 
 
 ## Release History
-
-###0.1.0 Initial release
+- 0.1.0 Initial release
 
