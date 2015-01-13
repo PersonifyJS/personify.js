@@ -208,8 +208,8 @@ Language key:
 
 Output Types:
 - 'text'
-- 'json'
-- 'xml'
+- 'JSON'
+- 'XML'
 
 All keys shown in `params` are required. 
 See [here](https://dev.twitter.com/rest/reference/get/search/tweets) for more information on optional parameters.
