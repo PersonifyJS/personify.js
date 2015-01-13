@@ -4,8 +4,8 @@ A JavaScript based library that allows easy access to IBM Watson features utiliz
 
 Our current version implements:
 
-- Watson User Modeling service extracts cognitive and social characteristics, including Big Five, Values, and Needs, from communications data provided.
-- Watson Machine Translation service converts text input in one language into a desired language for the end user. Translation is available for English, Brazilian Portuguese, Spanish, French and Arabic.
+- Watson User Modeling service which extracts cognitive and social characteristics, including Big Five, Values, and Needs, from communications data provided.
+- Watson Machine Translation service which converts text input in one language into a desired language for the end user. Translation is available for English, Brazilian Portuguese, Spanish, French and Arabic.
 - Twitter REST API.
 - Twitter Streaming API.
 
@@ -47,7 +47,7 @@ var config = {
 };
 
 //
-// Instantiate a new Personify object and pass in OAth credentials 
+// Instantiate a new Personify object and pass in OAuth credentials 
 // inside of an object literal
 //
 var P = new Personify(config);
@@ -85,7 +85,7 @@ P.homePersonify( params2, function (data, error) {
 //
 var params3 = { 
                 q: '#JavaScript', 
-                geoCode: 'San Francisco'
+                geocode: 'San Francisco' //geocode takes most major US cities and all US states
               };
 
 P.searchPersonify( params3 , function (data, error) {
@@ -157,17 +157,19 @@ P.streamTranslate( params7, function(data, error){
 
 #### var P = new Personify( config )
 
-Instantiate a new Personify and pass in a config.
+Instantiate a new Personify object and pass in a config.
 
 config - Type: `Object`
 
-At least one set of OAth credentials from both Twitter and IBM Bluemix are required to use the services personify.js leverages for you.
+At least one set of OAuth credentials from both Twitter and IBM Bluemix are required to use the services personify.js leverages for you.
 
-#### P.userPersonify( 'userName' , callback ) 
+#### P.userPersonify( userName , callback ) 
 
-'userName' - Type: `String`
+userName - Type: `String`
 
 Required. Represents a Twitter handle. Optionally you can include an '@' before the username.
+
+See [here](https://dev.twitter.com/rest/reference/get/statuses/user_timeline) for more information on optional parameters.
 
 #### P.homePersonify( [params] , callback ) 
 
@@ -175,21 +177,27 @@ Required. Represents a Twitter handle. Optionally you can include an '@' before 
 
 Key-value pairs inside of [params] are optional, but at least an empty object literal is required. 
 
-#### P.searchPersonify( { q: 'input' , [params] }, callback ) 
+See [here](https://dev.twitter.com/rest/reference/get/statuses/home_timeline) for more information on optional parameters.
 
-The 'q' key and its associated value, which is a string, are required. 'input' can be any word you may use to search in Twitter's internal search engine. Any additional search parameters are optional.
+#### P.searchPersonify( { q: input , [params] }, callback ) 
 
-####  P.searchTranslate( para , callback ) 
+input Type: `String`
 
-var para = {
-             track: 'input',
-             fromLanguage: 'en',
-             toLanguage: 'fr',
-             outputType: 'json'
-           }
+The 'q' key and its associated value, which is a string, are required. input can be any word you may use to search in Twitter's internal search engine. Any additional search parameters are optional.
 
-para - Type: `Object`
-'input' - Type: `String` or `Number` or `Array`
+See [here](https://dev.twitter.com/rest/reference/get/search/tweets) for more information on optional parameters.
+
+####  P.searchTranslate( params , callback ) 
+
+var params = {
+               q: input,
+               fromLanguage: 'en',
+               toLanguage: 'fr',
+               outputType: 'json'
+             }
+
+params - Type: `Object`
+input - Type: `String` or `Number` or `Array`
 
 Language key: 
 - 'ar' = Arabic
@@ -203,9 +211,53 @@ Output Types:
 - 'json'
 - 'xml'
 
-All keys shown in `para` are required. 
+All keys shown in `params` are required. 
+See [here](https://dev.twitter.com/rest/reference/get/search/tweets) for more information on optional parameters.
 
-Optional search parameters that can be added to para:
+####  P.userTranslate( params , callback ) 
+
+var params = {
+               screen_name: input,
+               fromLanguage: 'en',
+               toLanguage: 'fr',
+               outputType: 'json'
+             }
+
+params - Type: `Object`
+
+Please see Language key and Output Types under searchTranslate method in API.
+
+See [here](https://dev.twitter.com/rest/reference/get/statuses/user_timeline) for more information on optional parameters.
+
+####  P.homeTranslate( params , callback)
+
+var params = {
+               fromLanguage: 'en',
+               toLanguage: 'fr',
+               outputType: 'json'
+             }
+
+All keys in params are required. Optionally you can specify a `count` key. This limits the number of Tweets for the search. 
+
+count : val
+val - Type: `Number`
+val defaults to 20 and has a max of 200.
+
+See [here](https://dev.twitter.com/rest/reference/get/statuses/home_timeline) for more information on optional parameters.
+
+####  P.streamTranslate( params , callback )
+
+var params = {
+               track: input,
+               fromLanguage: 'en',
+               toLanguage: 'fr',
+               outputType: 'json'
+             }
+
+All keys in params are required for streaming.
+Please see Language key and Output Type options under searchTranslate method in API.
+
+Additionally, optional search parameters that can be added to params:
 - locations : boundingBox
 - stop : time
 
@@ -217,6 +269,8 @@ var sanFrancisco = [ '-122.75', '36.8', '-121.75', '37.8' ];
 
 time - Type: `Number`
 time is the number of miliseconds after the stream starts that you want the stream to stop
+
+See [here](https://dev.twitter.com/streaming/reference/post/statuses/filter) for more information on optional parameters.
 
 #### callback
 
