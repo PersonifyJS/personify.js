@@ -155,36 +155,65 @@ P.streamTranslate( params7, function(data, error){
 
 ## personify API:
 
-##### var P = new Personify( config )
+#### var P = new Personify( config )
 
 Instantiate a new Personify and pass in a config.
 
-##### config
+`config`
 Type: `Object`
 
 At least one set of OAth credentials from both Twitter and IBM Bluemix are required to use the services personify.js leverages for you.
 
-###### P.userPersonify( 'userName' , callback ) 
+#### P.userPersonify( 'userName' , callback ) 
+
 `'userName'`
 Type: `String`
 
 Required. Represents a Twitter handle. Optionally you can include an '@' before the username.
 
-###### P.homePersonify( [params] , callback ) 
-`[params]`
-Type: `Object`
+#### P.homePersonify( [params] , callback ) 
+
+`[params]`Type: `Object`
 
 Key-value pairs inside of [params] are optional, but at least an empty object literal is required. 
 
-###### P.searchPersonify( { q: 'input', [params] }, callback ) 
+#### P.searchPersonify( { q: 'input' , [params] }, callback ) 
 
-The 'q' key and its associated value, which is a string, are required. The string can be any word you may use to search in Twitter's search bar. Any additional search parameters are optional.
+The 'q' key and its associated value, which is a string, are required. `'input'` can be any word you may use to search in Twitter's internal search engine. Any additional search parameters are optional.
 
-######  P.searchTranslate( { q: 'input', fromLanguage: 'en', toLanguage: 'fr', outputType: 'json' }, callback ) 
+####  P.searchTranslate( para , callback ) 
 
-All keys shown in searchTranslate are required. 
+var para = {
+             track: 'input',
+             fromLanguage: 'en',
+             toLanguage: 'fr',
+             outputType: 'json'
+           }
 
-###### callback
+           var p = new person
+           p.streamTranslate.stop()
+
+`para` Type: `Object`
+`input`  Type: `String` or `Number` or `Array`
+
+All keys shown in `para` are required. 
+
+Optional search parameters that can be added to para:
+`locations : boudingBox`
+`stop : time`
+
+`boudingBox` coordinates can be found [here](https://www.flickr.com/places/info/1)
+Type: `Array`
+
+example: 
+var sanFrancisco = [ '-122.75', '36.8', '-121.75', '37.8' ];
+
+`time` Type: `Number`
+`time` is the number of miliseconds after the stream starts that you want the stream to stop
+
+
+
+#### callback
 
 Type: `Function`
 
