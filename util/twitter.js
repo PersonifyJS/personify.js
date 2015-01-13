@@ -18,22 +18,22 @@ var Personify = function(auth) {
     // `req.body.subject` is the subject that was entered by the end user
     // TODO: to have the end user enter the date
 
-// ======================= Watson User Modeling and Twitter REST below =============================
+// ========= Watson User Modeling and Twitter REST below =============================
 
 // Takes a twitter handle and return personality traits, needs and values in a JSON object
   Personify.prototype.userPersonify = function(twitterHandle, callback) {
 
     T.get('statuses/user_timeline', { screen_name: twitterHandle, count: 100 },
-      function(err, data, response) {
-        if (data.length) {
-          for (var i=0;i<data.length;i++){
-            twitterData += data[i].text;
-          }
-          personifyModule.watson(auth, twitterData, callback);
-        } else {
-          callback(data, err);
+        function(err, data, response) {
+          if (data.length) {
+            for (var i = 0; i < data.length; i++){
+              twitterData += data[i].text;
+            }
+            personifyModule.watson(auth, twitterData, callback);
+          } else {
+            callback(data, err);
         }
-      });
+    });
   };
 
 // Returns a collection of the most recent Tweets and retweets posted by the authenticating 
@@ -71,8 +71,7 @@ var Personify = function(auth) {
         params.geocode = geotype;
       } else {
         callback(null, 'Geo location is not valid!')
-      }
-      
+      } 
     }
  
     T.get('search/tweets', params, function(err, data, response) {
@@ -83,7 +82,6 @@ var Personify = function(auth) {
         }
         personifyModule.watson(auth, twitterData, callback);
       } else {
-        console.log(data)
         callback(data, err);
       }
     });
@@ -102,7 +100,6 @@ var Personify = function(auth) {
 //and parse then reconstruct the language codes to send to Watson Machine Translate
   var  createLangs = function(params){
     var translateCode;
-
     //langs key is Twitter language code, value is Watson language code
     var langs = {
       ar: 'arar',  //Arabic
@@ -160,7 +157,7 @@ var Personify = function(auth) {
     T.get('statuses/user_timeline', params,
      function(err, data, response) {
       if (data.length) {
-        for (var i=0;i<data.length;i++){
+        for (var i = 0; i < data.length; i++){
           twitterData += filterTweet(data[i].text);
         }
         translateModule.translate(auth, twitterData, translateCode, params.outputType, callback);
@@ -171,7 +168,7 @@ var Personify = function(auth) {
   }
 
 
-//Get tweets found in user'shome timeline and translate them to another language
+  //Get tweets found in user's home timeline and translate them to another language
   Personify.prototype.homeTranslate = function(params, callback) {
     var translateCode = createLangs(params);
 
@@ -183,7 +180,7 @@ var Personify = function(auth) {
         translateModule.translate(auth, twitterData, translateCode, params.outputType, callback);
       } else {
         callback(null, 'No data found!')
-      }   
+      }
     }; 
 
     if (arguments[0].constructor === Object){
@@ -193,7 +190,7 @@ var Personify = function(auth) {
     }
   };
 
-// Twitter search/tweets GET request combined with Watson Machine Translate
+  // Twitter search/tweets GET request combined with Watson Machine Translate
   Personify.prototype.searchTranslate = function (params, callback){
     var translateCode = createLangs(params);
 
@@ -231,7 +228,6 @@ var Personify = function(auth) {
   }
 
 // ==================== Watson Machine Translation and Twitter Streaming above =====================
-
 
 };
 
