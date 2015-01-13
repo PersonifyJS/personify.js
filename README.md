@@ -4,14 +4,14 @@ A JavaScript based library that allows easy access to IBM Watson features utiliz
 
 Our current version implements:
 
-- Watson User Modeling service extracts cognitive and social characteristics, including Big Five, Values, and Needs, from communications data provided.
-- Watson Machine Translation service converts text input in one language into a desired language for the end user. Translation is available for English, Brazilian Portuguese, Spanish, French and Arabic.
+- Watson User Modeling service which extracts cognitive and social characteristics, including Big Five, Values, and Needs, from communications data provided.
+- Watson Machine Translation service which converts text input in one language into a desired language for the end user. Translation is available for English, Brazilian Portuguese, Spanish, French and Arabic.
 - Twitter REST API.
 - Twitter Streaming API.
 
 #
 
-#Installing
+##Installing
 
 ```
 npm install personify --save
@@ -47,7 +47,8 @@ var config = {
 };
 
 //
-// Instantiate a new Personify object and pass in OAth credentials
+// Instantiate a new Personify object and pass in OAuth credentials 
+// inside of an object literal
 //
 var P = new Personify(config);
 
@@ -60,8 +61,8 @@ var params1 = {
                 count: 100
               };
 
-P.userPersonify( params1 , function (data, err) {
-    console.log(data, err);
+P.userPersonify( params1 , function (data, error) {
+    console.log(data, error);
 });
 
 //
@@ -74,8 +75,8 @@ var params2 = {
                 exclude_tweets: true 
               };
 
-P.homePersonify( params2, function (data, err) {
-    console.log(data, err);
+P.homePersonify( params2, function (data, error) {
+    console.log(data, error);
 });
 
 //
@@ -84,11 +85,11 @@ P.homePersonify( params2, function (data, err) {
 //
 var params3 = { 
                 q: '#JavaScript', 
-                geoCode: 'San Francisco'
+                geocode: 'San Francisco' //geocode takes most major US cities and all US states
               };
 
-P.searchPersonify( params3 , function (data, err) {
-  console.log(data, err);
+P.searchPersonify( params3 , function (data, error) {
+  console.log(data, error);
 });
 
 //
@@ -103,8 +104,8 @@ var params4 = {
                 outputType: 'text'  // Choose from text, json or XML
               };
 
-P.searchTranslate( params4 , function (data, err) {
-    console.log(data, err);
+P.searchTranslate( params4 , function (data, error) {
+    console.log(data, error);
 });
 
 //
@@ -117,8 +118,8 @@ var params5 = {
                 outputType: 'json'
               };
 
-P.userTranslate( params5, function(data, err){
-    console.log(data, err);
+P.userTranslate( params5, function(data, error){
+    console.log(data, error);
 });
 
 //
@@ -131,12 +132,12 @@ var params6 = {
                 outputType: 'json'
               };
 
-P.homeTranslate( params6, function(data, err){
-    console.log(data, err);
+P.homeTranslate( params6, function(data, error){
+    console.log(data, error);
 });
 
 //
-// Find tweets talkng about the LHC using Twitter's Streaming API and 
+// Find public tweets talkng about the Large Hadron Collider using Twitter's Streaming API and 
 // translate them into another language
 //
 var params7 = {
@@ -146,44 +147,141 @@ var params7 = {
                 outputType: 'text'
               };
 
-P.streamTranslate( params7, function(data, err){
-    console.log(data, err);
+P.streamTranslate( params7, function(data, error){
+    console.log(data, error);
 });
 
 ```
 
-# personify API:
+## personify API:
 
-######`P.userPersonify( 'input', callback )`
+#### var P = new Personify( config )
 
-**'input'**
+Instantiate a new Personify object and pass in a config.
 
-Required. Object type is a string representing a Twitter username. Optionally you can include an '@' before the username.
+config - Type: `Object`
 
-######`P.homePersonify( [params], callback )`
+At least one set of OAuth credentials from both Twitter and IBM Bluemix are required to use the services personify.js leverages for you.
 
-**params**
+#### P.userPersonify( userName , callback ) 
 
-Key-value pairs are optional, but at least empty object literal brackets are required. 
+userName - Type: `String`
 
-######`P.searchPersonify( { q: 'input', [additional params] }, callback )`
+Required. Represents a Twitter handle. Optionally you can include an '@' before the username.
 
-The 'q' key and its associated value, which is a string, are required. The string can be any word you may use to search in Twitter's search bar. Any additional key-value pairs are optional.
+See [here](https://dev.twitter.com/rest/reference/get/statuses/user_timeline) for more information on optional parameters.
 
-###### `P.searchTranslate( { q: 'input', fromLanguage: 'en', toLanguage: 'fr', outputType: 'json' }, callback )`
+#### P.homePersonify( [params] , callback ) 
 
-All key-value pairs inside of the object passed as the first argument are required. 
+[params] - Type: `Object`
 
-**callback**
+Key-value pairs inside of [params] are optional, but at least an empty object literal is required. 
 
-`function (data, err)`
+See [here](https://dev.twitter.com/rest/reference/get/statuses/home_timeline) for more information on optional parameters.
 
-- `data` is the parsed data received from IBM Watson.
+#### P.searchPersonify( { q: input , [params] }, callback ) 
+
+input Type: `String`
+
+The 'q' key and its associated value, which is a string, are required. input can be any word you may use to search in Twitter's internal search engine. Any additional search parameters are optional.
+
+See [here](https://dev.twitter.com/rest/reference/get/search/tweets) for more information on optional parameters.
+
+####  P.searchTranslate( params , callback ) 
+
+var params = {
+               q: input,
+               fromLanguage: 'en',
+               toLanguage: 'fr',
+               outputType: 'json'
+             }
+
+params - Type: `Object`
+input - Type: `String` or `Number` or `Array`
+
+Language key: 
+- 'ar' = Arabic
+- 'en' = English
+- 'es' = Spanish
+- 'fr' = French
+- 'pt' = Brazilian Portuguese
+
+Output Types:
+- 'text'
+- 'json'
+- 'xml'
+
+All keys shown in `params` are required. 
+See [here](https://dev.twitter.com/rest/reference/get/search/tweets) for more information on optional parameters.
+
+####  P.userTranslate( params , callback ) 
+
+var params = {
+               screen_name: input,
+               fromLanguage: 'en',
+               toLanguage: 'fr',
+               outputType: 'json'
+             }
+
+params - Type: `Object`
+
+Please see Language key and Output Types under searchTranslate method in API.
+
+See [here](https://dev.twitter.com/rest/reference/get/statuses/user_timeline) for more information on optional parameters.
+
+####  P.homeTranslate( params , callback)
+
+var params = {
+               fromLanguage: 'en',
+               toLanguage: 'fr',
+               outputType: 'json'
+             }
+
+All keys in params are required. Optionally you can specify a `count` key. This limits the number of Tweets for the search. 
+
+count : val
+val - Type: `Number`
+val defaults to 20 and has a max of 200.
+
+See [here](https://dev.twitter.com/rest/reference/get/statuses/home_timeline) for more information on optional parameters.
+
+####  P.streamTranslate( params , callback )
+
+var params = {
+               track: input,
+               fromLanguage: 'en',
+               toLanguage: 'fr',
+               outputType: 'json'
+             }
+
+All keys in params are required for streaming.
+Please see Language key and Output Type options under searchTranslate method in API.
+
+Additionally, optional search parameters that can be added to params:
+- locations : boundingBox
+- stop : time
+
+boundingBox - Type: `Array`
+boundingBox coordinates can be found [here](https://www.flickr.com/places/info/1)
+
+boundingBox example: 
+var sanFrancisco = [ '-122.75', '36.8', '-121.75', '37.8' ];
+
+time - Type: `Number`
+time is the number of miliseconds after the stream starts that you want the stream to stop
+
+See [here](https://dev.twitter.com/streaming/reference/post/statuses/filter) for more information on optional parameters.
+
+#### callback
+
+Type: `Function`
+
+- callback takes two parameters, data and error, in that order. 
 - callback is required for all methods. 
 
 -------
 
-#Find your OAuth credentials
+##Find your OAuth credentials
 
 Go here to create a Twitter app and get OAuth credentials (if you haven't already): https://dev.twitter.com/apps/new
 
@@ -194,7 +292,7 @@ In order to use IBM Watson, you need to:
 - From there, IBM will provide your credentials
 
 
-#How do I run the tests?
+##How do I run the tests?
 
 To make the tests pass you will need to fill out the file: `config.js` inside the tests folder. 
 
@@ -204,18 +302,18 @@ To run the tests:
 npm test
 ```
 
-### Contributing
+## Contributing
 
 See 
 
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [STYLE-GUIDE.md](STYLE-GUIDE.md) 
 
-### To Do
+## To Do
 
 - Expand library with more Watson services
 
-### Development Team
+## Development Team
 
 - [Essam Al Joubori](https://github.com/essamjoubori)
 - [Rohan Agrawal](https://github.com/rohanagrawal)
@@ -225,6 +323,5 @@ See
 
 
 ## Release History
-
-###0.1.0 Initial release
+- 0.1.0 Initial release
 
