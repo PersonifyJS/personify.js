@@ -144,15 +144,18 @@ describe('translation methods should work', function(){
 
   // it('personify.streamTranslate function should Not work without params `track`', function(done){
   //   var personify = new Personify(config);
-  //   var params =  {
+  //   var params =  { 
   //                   fromLanguage: 'fr',
   //                   toLanguage: 'ar',
   //                   outputType: 'text'
   //                 };
+
   //   personify.streamTranslate(params, function(data, err){
-  //   }, Error);
-  //   done();
+  //     err.should.be.ok;
+  //     done();
+  //   });
   // });
 
-
 });
+
+
