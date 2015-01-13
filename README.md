@@ -159,27 +159,27 @@ P.streamTranslate( params7, function(data, error){
 
 Instantiate a new Personify and pass in a config.
 
-`config`
+config
 Type: `Object`
 
 At least one set of OAth credentials from both Twitter and IBM Bluemix are required to use the services personify.js leverages for you.
 
 #### P.userPersonify( 'userName' , callback ) 
 
-`'userName'`
+'userName'
 Type: `String`
 
 Required. Represents a Twitter handle. Optionally you can include an '@' before the username.
 
 #### P.homePersonify( [params] , callback ) 
 
-`[params]`Type: `Object`
+[params] - Type: `Object`
 
 Key-value pairs inside of [params] are optional, but at least an empty object literal is required. 
 
 #### P.searchPersonify( { q: 'input' , [params] }, callback ) 
 
-The 'q' key and its associated value, which is a string, are required. `'input'` can be any word you may use to search in Twitter's internal search engine. Any additional search parameters are optional.
+The 'q' key and its associated value, which is a string, are required. 'input' can be any word you may use to search in Twitter's internal search engine. Any additional search parameters are optional.
 
 ####  P.searchTranslate( para , callback ) 
 
@@ -190,11 +190,20 @@ var para = {
              outputType: 'json'
            }
 
-           var p = new person
-           p.streamTranslate.stop()
+para - Type: `Object`
+'input' - Type: `String` or `Number` or `Array`
 
-`para` Type: `Object`
-`input`  Type: `String` or `Number` or `Array`
+Language key: 
+- 'ar' = Arabic
+- 'en' = English
+- 'es' = Spanish
+- 'fr' = French
+- 'pt' = Brazilian Portuguese
+
+Output Types:
+- 'text'
+- 'json'
+- 'xml'
 
 All keys shown in `para` are required. 
 
@@ -210,8 +219,6 @@ var sanFrancisco = [ '-122.75', '36.8', '-121.75', '37.8' ];
 
 `time` Type: `Number`
 `time` is the number of miliseconds after the stream starts that you want the stream to stop
-
-
 
 #### callback
 
