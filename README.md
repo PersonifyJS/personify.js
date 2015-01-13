@@ -159,15 +159,13 @@ P.streamTranslate( params7, function(data, error){
 
 Instantiate a new Personify and pass in a config.
 
-config
-Type: `Object`
+config - Type: `Object`
 
 At least one set of OAth credentials from both Twitter and IBM Bluemix are required to use the services personify.js leverages for you.
 
 #### P.userPersonify( 'userName' , callback ) 
 
-'userName'
-Type: `String`
+'userName' - Type: `String`
 
 Required. Represents a Twitter handle. Optionally you can include an '@' before the username.
 
@@ -208,17 +206,17 @@ Output Types:
 All keys shown in `para` are required. 
 
 Optional search parameters that can be added to para:
-`locations : boudingBox`
-`stop : time`
+- locations : boundingBox
+- stop : time
 
-`boudingBox` coordinates can be found [here](https://www.flickr.com/places/info/1)
-Type: `Array`
+boundingBox - Type: `Array`
+boundingBox coordinates can be found [here](https://www.flickr.com/places/info/1)
 
-example: 
+boundingBox example: 
 var sanFrancisco = [ '-122.75', '36.8', '-121.75', '37.8' ];
 
-`time` Type: `Number`
-`time` is the number of miliseconds after the stream starts that you want the stream to stop
+time - Type: `Number`
+time is the number of miliseconds after the stream starts that you want the stream to stop
 
 #### callback
 
