@@ -326,5 +326,6 @@ Our [PersonifyApp](http://personify.mybluemix.net/) grabs tweets based on a keyw
 
 
 ## Release History
+- 1.0.1 README.md updated
 - 1.0.0 Initial release
 
