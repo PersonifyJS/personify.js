@@ -319,6 +319,9 @@ See
 - [Rohan Agrawal](https://github.com/rohanagrawal)
 - [Phil Elauria](https://github.com/philelauria)
 
+## Example Application
+Our [PersonifyApp](http://personify.mybluemix.net/) grabs tweets based on a keyword search and geolocation parameters and returns a Big Five assessment based on those tweets. It then compares that local result to the US in general. A company for example, might be interested to know about the collective Big Five traits of people who are talking about their products, services or brand. 
+
 -------
 
 
