@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/PersonifyJS/personify.js.png)](https://travis-ci.org/PersonifyJS/personify.js)
 #personify.js
 
 A JavaScript based library that allows easy access to IBM Watson features utilizing Twitter data. IBM Watson has some of the most advanced linguistic analytics tools available today. Twitter is one of the world's most popular text-based communication platforms. Leverage the power of both with minimal effort through personify.js. 
