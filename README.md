@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/PersonifyJS/personify.js.png)](https://travis-ci.org/PersonifyJS/personify.js)
-#personify.js
+#Personify.js
 
-A JavaScript based library that allows easy access to IBM Watson features utilizing Twitter data. IBM Watson has some of the most advanced linguistic analytics tools available today. Twitter is one of the world's most popular text-based communication platforms. Leverage the power of both with minimal effort through personify.js. 
+A JavaScript based library that allows easy access to IBM Watson features utilizing Twitter data. IBM Watson has some of the most advanced linguistic analytics tools available today. Twitter is one of the world's most popular text-based communication platforms. Leverage the power of both with minimal effort through Personify.js. 
 
 Our current version implements:
 
@@ -154,7 +154,7 @@ P.streamTranslate( params7, function(data, error){
 
 ```
 
-## personify API:
+## Personify API:
 
 #### var P = new Personify( config )
 
@@ -162,7 +162,7 @@ Instantiate a new Personify object and pass in a config.
 
 config - Type: `Object`
 
-At least one set of OAuth credentials from both Twitter and IBM Bluemix are required to use the services personify.js leverages for you.
+At least one set of OAuth credentials from both Twitter and IBM Bluemix are required to use the services Personify.js leverages for you.
 
 #### P.userPersonify( userName , callback ) 
 
