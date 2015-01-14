@@ -115,7 +115,7 @@ var params5 = {
                 screen_name: 'userName',
                 fromLanguage: 'en',
                 toLanguage: 'fr',
-                outputType: 'json'
+                outputType: 'text'
               };
 
 P.userTranslate( params5, function(data, error){
@@ -141,7 +141,7 @@ P.homeTranslate( params6, function(data, error){
 // translate them into another language
 //
 var params7 = {
-                track: 'Large Hadron Collider',
+                track: 'twitter',
                 fromLanguage: 'en',
                 toLanguage: 'fr',
                 outputType: 'text'
