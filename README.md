@@ -57,7 +57,7 @@ var P = new Personify(config);
 // '@' can be used before a username, but is not required (e.g. '@userName')
 //
 var params1 = { 
-                screen_name: 'userName'
+                screen_name: 'userName',
                 count: 100
               };
 
@@ -141,7 +141,7 @@ P.homeTranslate( params6, function(data, error){
 // translate them into another language
 //
 var params7 = {
-                track: 'Large Hadron Collider'
+                track: 'Large Hadron Collider',
                 fromLanguage: 'en',
                 toLanguage: 'fr',
                 outputType: 'text'
