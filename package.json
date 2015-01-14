@@ -6,6 +6,10 @@
   "author": {
     "name": "Essam Al Joubori, Phil Elauria, Rohan Agrawal"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PersonifyJS/personify.js"
+  },
   "keywords": [
     "watson",
     "twitter",
