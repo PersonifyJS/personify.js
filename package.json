@@ -33,7 +33,6 @@
   "devDependencies": {
     "async": "0.2.9",
     "colors": "0.6.x",
-    "memwatch": "0.2.2",
     "mocha": "^2.1.0",
     "should": "^4.4.2"
   },
