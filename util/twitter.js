@@ -1,3 +1,9 @@
+//Personify.js
+//For more information, visit http://personifyjs.github.io.
+//Created by Essam Al Joubori, Rohan Agrawal, Phil Elauria
+//Copyright 2014 - 2015 ssam Al Joubori, Rohan Agrawal, Phil Elauria 
+//For user under the MIT license
+
 var Twit = require('twit');
 var personifyModule = require('./watson');
 var geoLocations = require('../lib/geoLocations');
