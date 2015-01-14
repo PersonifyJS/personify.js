@@ -1,3 +1,9 @@
+//Personify.js
+//For more information, visit http://personifyjs.github.io.
+//Created by Essam Al Joubori, Rohan Agrawal, Phil Elauria
+//Copyright 2014 - 2015 ssam Al Joubori, Rohan Agrawal, Phil Elauria 
+//For user under the MIT license
+
 var https = require('https');
 var url = require('url');
 var querystring = require('querystring');

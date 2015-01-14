@@ -1,3 +1,9 @@
+//Personify.js
+//For more information, visit http://personifyjs.github.io.
+//Created by Essam Al Joubori, Rohan Agrawal, Phil Elauria
+//Copyright 2014 - 2015 ssam Al Joubori, Rohan Agrawal, Phil Elauria 
+//For user under the MIT license
+
 var assert = require('assert');
 var should = require('should');// https://github.com/tj/should.js
 var Personify = require('../util/twitter');
