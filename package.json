@@ -39,6 +39,6 @@
   },
   "homepage": "http://personifyjs.github.io/",
   "scripts": {
-    "test": "./node_modules/.bin/mocha tests/* -t 70000 -R spec --bail"
+    "test": "make test"
   }
 }
