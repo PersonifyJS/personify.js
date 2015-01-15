@@ -1,4 +1,4 @@
-![Alt text](https://s3-us-west-1.amazonaws.com/personify.js/Personify.js+Logo.png)
+![Alt text](https://s3-us-west-1.amazonaws.com/personify.js/Personify.js_logo.png)
 
 [![Build Status](https://travis-ci.org/PersonifyJS/personify.js.png)](https://travis-ci.org/PersonifyJS/personify.js)
 #Personify.js
