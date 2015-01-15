@@ -235,29 +235,6 @@ When writing any block of code that is logically subordinate to the line immedia
     }
     ```
 
-
-
-### Working with files
-
-* Do not end a file with any character other than a newline.
-* Don't use the -a or -m flags for `git commit` for the first half of the class, since they conceal what is actually happening (and do slightly different things than most people expect).
-
-    ```shell
-    # good:
-    > git add .
-    > git commit
-    [save edits to the commit message file using the text editor that opens]
-
-    # bad:
-    > git commit -a
-    [save edits to the commit message file using the text editor that opens]
-
-    # bad:
-    > git add .
-    > git commit -m "updated algorithm"
-    ```
-
-
 ### Opening or closing too many blocks at once
 
 * The more blocks you open on a single line, the more your reader needs to remember about the context of what they are reading. Try to resolve your blocks early, and refactor. A good rule is to avoid closing more than two blocks on a single line--three in a pinch.
@@ -306,7 +283,7 @@ When writing any block of code that is logically subordinate to the line immedia
 
 ### Minutia
 
-* Don't rely on JavaScripts implicit global variables. If you are intending to write to the global scope, export things to `window.*` explicitly instead.
+* Don't rely on JavaScript's implicit global variables. If you are intending to write to the global scope, export things to `window.*` explicitly instead.
 
     ```javascript
     // good:

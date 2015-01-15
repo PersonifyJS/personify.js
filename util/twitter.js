@@ -1,8 +1,8 @@
 //Personify.js
 //For more information, visit http://personifyjs.github.io.
 //Created by Essam Al Joubori, Rohan Agrawal, Phil Elauria
-//Copyright 2014 - 2015 ssam Al Joubori, Rohan Agrawal, Phil Elauria 
-//For user under the MIT license
+//Copyright 2014 - 2015 Essam Al Joubori, Rohan Agrawal, Phil Elauria 
+//For use under the MIT license
 
 var Twit = require('twit');
 var personifyModule = require('./watson');
@@ -20,13 +20,12 @@ var Personify = function(auth) {
           access_token_secret :  auth.twitterConfig.access_token_secret
   });
   
-    // create a profile request with the text and the htpps options and call it
-    // `req.body.subject` is the subject that was entered by the end user
-    // TODO: to have the end user enter the date
+  // create a profile request with the text and the htpps options and call it
+  // `req.body.subject` is the subject that was entered by the end user
 
-// ========= Watson User Modeling and Twitter REST below =============================
+  // ========= Watson User Modeling and Twitter REST below =============================
 
-// Takes a twitter handle and return personality traits, needs and values in a JSON object
+  // Takes a twitter handle and return personality traits, needs and values in a JSON object
   Personify.prototype.userPersonify = function(twitterHandle, callback) {
 
     T.get('statuses/user_timeline', { screen_name: twitterHandle, count: 100 },
@@ -42,9 +41,9 @@ var Personify = function(auth) {
     });
   };
 
-// Returns a collection of the most recent Tweets and retweets posted by the authenticating 
-// user and the users they follow. The home timeline is central to how most users interact with 
-// the Twitter service.
+  // Returns a collection of the most recent Tweets and retweets posted by the authenticated 
+  // user and the users they follow. The home timeline is central to how most users interact with 
+  // the Twitter service.
   Personify.prototype.homePersonify = function(params, callback) {
 
     var getData = function(data) {
@@ -54,7 +53,7 @@ var Personify = function(auth) {
         }
         personifyModule.watson(auth, twitterData, callback);
       } else {
-        callback(null, 'No data found!')
+        callback(null, 'No data found!');
       }   
     }; 
 
@@ -66,9 +65,10 @@ var Personify = function(auth) {
   };
 
 
-// Uses Twitter search/tweets GET request. Has all optional parameters available
-// plus additional quick and conventient state and city search from geoLocations.js file
+  // Uses Twitter search/tweets GET request. Has all optional parameters available
+  // plus additional quick and conventient state and city search from geoLocations.js file
   Personify.prototype.searchPersonify = function(params, callback) {
+    
     var geotype;
  
     if (typeof params.geocode === 'string') {
@@ -76,7 +76,7 @@ var Personify = function(auth) {
         geotype = geoLocations[params.geocode].geo;
         params.geocode = geotype;
       } else {
-        callback(null, 'Geo location is not valid!')
+        callback(null, 'Geo location is not valid!');
       } 
     }
  
@@ -93,17 +93,17 @@ var Personify = function(auth) {
     });
   };
 
-// ======================= Watson User Modeling and Twitter REST above =============================
+  // ======================= Watson User Modeling and Twitter REST above =============================
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Personify methods above this line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Personify methods above this line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Translate methods below this line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Translate methods below this line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// =============================== Helper functions for Translate methods below ====================
+  // =============================== Helper functions for Translate methods below ====================
 
-//Take parameters object from user's method call 
-//(eg, arguments[0] in P.translate({q: '#nike', fromLanguage: 'ar', toLanguage: 'en', etc...}, callback))
-//and parse then reconstruct the language codes to send to Watson Machine Translate
+  //Take parameters object from user's method call 
+  //(eg, arguments[0] in P.translate({q: '#nike', fromLanguage: 'ar', toLanguage: 'en', etc...}, callback))
+  //and parse then reconstruct the language codes to send to Watson Machine Translate
   var  createLangs = function(params){
     var translateCode;
     //langs key is Twitter language code, value is Watson language code
@@ -124,21 +124,21 @@ var Personify = function(auth) {
     return translateCode;
   }
 
-// Remove all characters that Machine Translate will not process (like emojis)
-// Machine Translate will throw an error if wrong characters are sent to it
+  // Remove all characters that Machine Translate will not process (like emojis)
+  // Machine Translate will throw an error if wrong characters are sent to it
     var filterTweet = function(tweet) {
       var wantedChars = tweet.replace(/[^\u1f600-\u1f64f]/g, ' ');
       return wantedChars;
     };
 
-// stop streaming with timer
+  // stop streaming with timer
     var stopStream = function(time, context){
       setTimeout(function () {
         context.stop();
       }, time);
     };
 
-// call stream. Created to avoid duplication. Can be used more if more stream methods created
+  // call stream. Created to avoid duplication. Can be used more if more stream methods created
     var streams = function(parameterObj, cb, stream){
       var translateCode = createLangs(parameterObj);
       stream.on('tweet', function (tweet) {
@@ -151,13 +151,14 @@ var Personify = function(auth) {
         cb(null, err);
       });
     }
-// =============================== Helper functions for Translate methods above ====================
+  // =============================== Helper functions for Translate methods above ====================
 
-// ======================= Watson Machine Translation and Twitter REST below =======================
+  // ======================= Watson Machine Translation and Twitter REST below =======================
 
 
-//Take a Twitter handle and get back Twitter account's tweets translated
+  //Take a Twitter handle and get back Twitter account's tweets translated
   Personify.prototype.userTranslate = function(params, callback){
+
     var translateCode = createLangs(params);
 
     T.get('statuses/user_timeline', params,
@@ -176,6 +177,7 @@ var Personify = function(auth) {
 
   //Get tweets found in user's home timeline and translate them to another language
   Personify.prototype.homeTranslate = function(params, callback) {
+
     var translateCode = createLangs(params);
 
     var getData = function(data) {
@@ -185,7 +187,7 @@ var Personify = function(auth) {
         }
         translateModule.translate(auth, twitterData, translateCode, params.outputType, callback);
       } else {
-        callback(null, 'No data found!')
+        callback(null, 'No data found!');
       }
     }; 
 
@@ -198,6 +200,7 @@ var Personify = function(auth) {
 
   // Twitter search/tweets GET request combined with Watson Machine Translate
   Personify.prototype.searchTranslate = function (params, callback){
+
     var translateCode = createLangs(params);
 
     T.get('search/tweets', params, function(err, data, response) {
@@ -208,15 +211,14 @@ var Personify = function(auth) {
         }
         translateModule.translate(auth, twitterData, translateCode, params.outputType, callback);
       } else {
-        console.log(data)
         callback(data, err);
       }
     });
   }; 
 
-// ======================= Watson Machine Translation and Twitter REST above =======================
+  // ======================= Watson Machine Translation and Twitter REST above =======================
 
-// ==================== Watson Machine Translation and Twitter Streaming below =====================
+  // ==================== Watson Machine Translation and Twitter Streaming below =====================
 
   Personify.prototype.streamTranslate = function(params, callback){
     
@@ -234,7 +236,7 @@ var Personify = function(auth) {
     }
   }
 
-// ==================== Watson Machine Translation and Twitter Streaming above =====================
+  // ==================== Watson Machine Translation and Twitter Streaming above =====================
 
 };
 
