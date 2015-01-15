@@ -1,9 +1,3 @@
-//Personify.js
-//For more information, visit http://personifyjs.github.io.
-//Created by Essam Al Joubori, Rohan Agrawal, Phil Elauria
-//Copyright 2014 - 2015 ssam Al Joubori, Rohan Agrawal, Phil Elauria 
-//For user under the MIT license
-
 var https = require('https');
 var url = require('url');
 var querystring = require('querystring');
@@ -40,10 +34,6 @@ if (process.env.VCAP_SERVICES) {
     console.log('No VCAP_SERVICES found in ENV, using defaults for local development');
   }
 
-  console.log('service_url = ' + service_url);
-  console.log('service_username = ' + service_username);
-  console.log('service_password = ' + new Array(service_password.length).join("X"));
-
   var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toString('base64');
 
 
@@ -71,7 +61,7 @@ if (process.env.VCAP_SERVICES) {
 
       // create a visualization request with the profile data
       create_viz_request(viz_options,profile_string)(function(error,viz) {
-        if (error) console.log('Error Message!!!!!!!!!!!!!!')//res.render('index',{'error': error.message});
+        if (error) console.log('Error message from line 64 in watson.js!');
         else {
         //Here we get the results from Watson and send it back to the client
         //console.log(flat_traits); 

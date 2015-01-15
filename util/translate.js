@@ -1,22 +1,13 @@
 //Personify.js
 //For more information, visit http://personifyjs.github.io.
 //Created by Essam Al Joubori, Rohan Agrawal, Phil Elauria
-//Copyright 2014 - 2015 ssam Al Joubori, Rohan Agrawal, Phil Elauria 
-//For user under the MIT license
+//Copyright 2014 - 2015 Essam Al Joubori, Rohan Agrawal, Phil Elauria 
+//For use under the MIT license
 
 var https = require('https');
 var url = require('url');
 var querystring = require('querystring');
 
-// setup middleware
-
-// app.use(express.static(__dirname + '/public')); //setup static public directory
-// app.set('view engine', 'jade');
-// app.set('views', __dirname + '/views'); //optional since express defaults to CWD/views
-
-//module.exports.translate parameters info
-//language: enus, frfr, arar, ptbr, eses 
-//outputType: txt, json, xml
 module.exports.translate = function(authenticate, data, language, outputType, callback){
 
 // defaults for dev outside bluemix
@@ -39,25 +30,20 @@ if (process.env.VCAP_SERVICES) {
     service_username = svc.username;
     service_password = svc.password;
   } else {
-    //console.log('The service '+service_name+' is not in the VCAP_SERVICES, did you forget to bind it?');
+    console.log('The service '+service_name+' is not in the VCAP_SERVICES, did you forget to bind it?');
   }
 
 } else {
-  //console.log('No VCAP_SERVICES found in ENV, using defaults for local development');
+  console.log('No VCAP_SERVICES found in ENV, using defaults for local development');
 }
-
-// console.log('service_url = ' + service_url);
-// console.log('service_username = ' + service_username);
-// console.log('service_password = ' + new Array(service_password.length).join("X"));
 
 var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toString('base64');
 
   var request_data = { 
     'txt': data, 
     'sid': language,
-    'rt': outputType // return type e.g. json, text or xml
+    'rt': outputType //outputType: 'txt', 'json', or 'xml'
   };
-  //console.log('request_data', request_data)
   var parts = url.parse(service_url);
   // create the request options to POST our question to Watson
   var options = { host: parts.hostname,
@@ -70,7 +56,7 @@ var auth = 'Basic ' + new Buffer(service_username + ':' + service_password).toSt
       'Authorization' :  auth }
   };
 
-    // Create a request to POST to Watson
+  // Create a request to POST to Watson
   var watson_req = https.request(options, function(result) {
     result.setEncoding('utf-8');
     var responseString = '';
