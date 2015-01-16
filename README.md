@@ -165,11 +165,13 @@ config - Type: `Object`
 
 At least one set of OAuth credentials from both Twitter and IBM Bluemix are required to use the services Personify.js leverages for you.
 
-#### P.userPersonify( userName , callback ) 
+#### P.userPersonify( params , callback ) 
 
-userName - Type: `String`
+var params = {
+  screen_name: 'userName'
+}
 
-Required. Represents a Twitter handle. Optionally you can include an '@' before the username.
+params with screen_name is required. userName represents a Twitter handle. Optionally you can include an '@' before userName.
 
 See [here](https://dev.twitter.com/rest/reference/get/statuses/user_timeline) for more information on optional parameters.
 
