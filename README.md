@@ -189,7 +189,7 @@ The 'q' key and its associated value, which is a string, are required. input can
 
 See [here](https://dev.twitter.com/rest/reference/get/search/tweets) for more information on optional parameters.
 
-For a list of shortcut terms for geocode, see [geoList.txt](geoList.txt). geocode works for searchPersonify and searchTranslate methods. 
+For a list of shortcut terms for geocode, see [geoList.txt](lib/geoList.txt). geocode works for searchPersonify and searchTranslate methods. 
 
 ####  P.searchTranslate( params , callback ) 
 
