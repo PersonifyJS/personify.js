@@ -88,7 +88,7 @@ P.homePersonify( params2, function (data, error) {
 var params3 = { 
                 q: '#JavaScript', 
                 geocode: 'San Francisco' //geocode takes most major US cities and all US states
-              };
+              };                         //see [here](geoList.txt) for a full list of city and state shortcut terms
 
 P.searchPersonify( params3 , function (data, error) {
   console.log(data, error);
@@ -188,6 +188,8 @@ input Type: `String`
 The 'q' key and its associated value, which is a string, are required. input can be any word you may use to search in Twitter's internal search engine. Any additional search parameters are optional.
 
 See [here](https://dev.twitter.com/rest/reference/get/search/tweets) for more information on optional parameters.
+
+
 
 ####  P.searchTranslate( params , callback ) 
 
