@@ -26,9 +26,9 @@ var Personify = function(auth) {
   // ========= Watson User Modeling and Twitter REST below =============================
 
   // Takes a twitter handle and return personality traits, needs and values in a JSON object
-  Personify.prototype.userPersonify = function(twitterHandle, callback) {
+  Personify.prototype.userPersonify = function(params, callback) {
 
-    T.get('statuses/user_timeline', { screen_name: twitterHandle, count: 100 },
+    T.get('statuses/user_timeline', params,
         function(err, data, response) {
           if (data.length) {
             for (var i = 0; i < data.length; i++){
