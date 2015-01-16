@@ -49,7 +49,7 @@ describe('All methods are working', function(){
 
   xit('personify.homePersonify function should work', function(done){ 
     var personify = new Personify(config);
-    personify.homePersonify('@test', function(data, err) {
+    personify.homePersonify({screen_name: '@test'}, function(data, err) {
       if(err) throw err;
       done();
     }); 
