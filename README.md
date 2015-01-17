@@ -88,7 +88,7 @@ P.homePersonify( params2, function (data, error) {
 var params3 = { 
                 q: '#JavaScript', 
                 geocode: 'San Francisco' //geocode takes most major US cities and all US states
-              };
+              };                         //see this method in API for a full list of city and state shortcut terms
 
 P.searchPersonify( params3 , function (data, error) {
   console.log(data, error);
@@ -165,11 +165,13 @@ config - Type: `Object`
 
 At least one set of OAuth credentials from both Twitter and IBM Bluemix are required to use the services Personify.js leverages for you.
 
-#### P.userPersonify( userName , callback ) 
+#### P.userPersonify( params , callback ) 
 
-userName - Type: `String`
+var params = {
+  screen_name: 'userName'
+}
 
-Required. Represents a Twitter handle. Optionally you can include an '@' before the username.
+params with screen_name is required. userName represents a Twitter handle. Optionally you can include an '@' before userName.
 
 See [here](https://dev.twitter.com/rest/reference/get/statuses/user_timeline) for more information on optional parameters.
 
@@ -188,6 +190,8 @@ input Type: `String`
 The 'q' key and its associated value, which is a string, are required. input can be any word you may use to search in Twitter's internal search engine. Any additional search parameters are optional.
 
 See [here](https://dev.twitter.com/rest/reference/get/search/tweets) for more information on optional parameters.
+
+For a list of shortcut terms for geocode, see [geoList.txt](lib/geoList.txt). geocode works for searchPersonify and searchTranslate methods. 
 
 ####  P.searchTranslate( params , callback ) 
 
