@@ -4,8 +4,6 @@ var querystring = require('querystring');
 var extend = require('util')._extend;
 var flatten = require('../lib/flatten');
 
-var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
-
 // exporting the watson module to be required by the end user
 module.exports.watson =  function(authenticate, data, callback) {
  
@@ -96,12 +94,10 @@ var create_profile_request = function(options, content, res) {
       });
       
       result.on('end', function() {
-
         if (result.statusCode != 200) {
           var error = JSON.parse(response_string);
           // render error if the results are less than 100 words
-          // res.send({"error" : "Watson: Oh, dear. It looks like there aren't enough tweets to conduct an analysis. Kindly send me another search query."});
-           callback({'message': error.user_message}, null);
+          callback({'message': error.user_message}, null);
         } else
           callback(null,response_string);
       });

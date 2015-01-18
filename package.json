@@ -1,11 +1,25 @@
 {
   "name": "personify",
   "description": "A JavaScript based library that allows easy access to IBM Watson features utilizing Twitter data",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./util/twitter",
-  "author": {
-    "name": "Essam Al Joubori, Phil Elauria, Rohan Agrawal"
-  },
+  "contributors": [
+    {
+      "name" : "Essam Al Joubori",
+      "email" : "essam.joubori@gmail.com",
+      "url" : "https://github.com/essamjoubori"
+    },
+    {
+      "name" : "Phil Elauria",
+      "email" : "phil.elauria@gmail.com",
+      "url" : "https://github.com/philelauria"
+    },
+    {
+      "name" : "Rohan Agrawal",
+      "email" : "rohankargrawal@gmail.com",
+      "url" : "https://github.com/rohanagrawal"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/PersonifyJS/personify.js"
@@ -38,6 +52,6 @@
   },
   "homepage": "http://personifyjs.github.io/",
   "scripts": {
-    "test": "make test"
+    "test": "./node_modules/.bin/mocha tests/* -t 70000 -R spec --bail"
   }
 }
