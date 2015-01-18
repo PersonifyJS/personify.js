@@ -94,17 +94,6 @@ var create_profile_request = function(options, content, res) {
       });
       
       result.on('end', function() {
-        
-        // try {
-        //   response_string;
-        //   callback(null,response_string);
-        // }
-        // catch (e) {
-        //   var error = JSON.parse(response_string);
-        //   callback({'message': error.user_message}, null);
-        // }
-
-
         if (result.statusCode != 200) {
           var error = JSON.parse(response_string);
           // render error if the results are less than 100 words
