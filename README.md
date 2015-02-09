@@ -7,11 +7,10 @@ A JavaScript based library that allows easy access to IBM Watson features utiliz
 
 Our current version implements:
 
-- Watson User Modeling service which extracts cognitive and social characteristics, including Big Five, Values, and Needs, from communications data provided.
+- Watson User Modeling service, which extracts cognitive and social characteristics from the communications data provided including the Big Five Personality Traits, Values, and Needs.
 - Watson Machine Translation service which converts text input in one language into a desired language for the end user. Translation is available for English, Brazilian Portuguese, Spanish, French and Arabic.
 - Twitter REST API.
 - Twitter Streaming API.
-
 
 ##Installing
 
@@ -297,7 +296,6 @@ In order to use IBM Watson, you need to:
 - Add User Modeling and/ or Machine Translation service(s)
 - From there, IBM will provide your credentials
 
-
 ##How do I run the tests?
 
 To make the tests pass you will need to fill out the file: `config.js` inside the tests folder.
@@ -330,10 +328,8 @@ Our [PersonifyApp](http://personify.mybluemix.net/) grabs tweets based on a keyw
 
 -------
 
-
 ## Release History
 - 1.0.3 Cleaned up code, added geoList file, and updated README.md
 - 1.0.2 Personify logo added
 - 1.0.1 README.md updated
 - 1.0.0 Initial release
-
