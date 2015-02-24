@@ -138,8 +138,8 @@ P.homeTranslate( params6, function(data, error){
 });
 
 //
-// Find public tweets talkng about the Large Hadron Collider using Twitter's Streaming API and 
-// translate them into another language
+// Find public tweets talkng about a searched keyword using Twitter's Streaming 
+// API and translate them into another language
 //
 var params7 = {
                 track: 'twitter',
